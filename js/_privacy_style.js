@@ -37,7 +37,14 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 
 hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
+  navMenu.classList.toggle('show');
+});
+
+// Close hamburger menu when clicking outside
+window.addEventListener('click', (event) => {
+  if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+    navMenu.classList.remove('show');
+  }
 });
 
 // ----------------------------------------------------------------------------------------

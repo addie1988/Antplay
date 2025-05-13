@@ -40,6 +40,13 @@ hamburger.addEventListener('click', () => {
   navMenu.classList.toggle('show');
 });
 
+// Close hamburger menu when clicking outside
+window.addEventListener('click', (event) => {
+  if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+    navMenu.classList.remove('show');
+  }
+});
+
 // ----------------------------------------------------------------------------------------
 
 // 錨點 scroll
@@ -174,4 +181,5 @@ function animate() {
 animate(); // 啟動動畫
 
 // ----------------------------------------------------------------------------------------
+
 
