@@ -938,19 +938,18 @@ html {
 .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content span {
   font-size: 14px;
   color: #9d9d9d;
-  margin: 20px 0;
 }
 
 .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content p {
   font-size: 18px;
   color: #333;
-  margin: 20px 0;
 }
 
 .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content b {
   width: 100%;
   display: block;
   border: .1px solid #e8e8e8;
+  margin: 20px 0;
 }
 
 .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content ul {

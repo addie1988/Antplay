@@ -590,6 +590,7 @@ html {
 
 .games .games_content .games_box {
   position: relative;
+  transition: all 1s ease;
 }
 
 .games .games_content .games_box .games_box_content {
