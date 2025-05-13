@@ -590,6 +590,7 @@ html {
 
 .games .games_content .games_box {
   position: relative;
+  transition: all 1s ease;
 }
 
 .games .games_content .games_box .games_box_content {
@@ -921,7 +922,7 @@ html {
 
 .teaching .teaching_content .game_details .game_details_content .game_details_text {
   position: relative;
-  width: 65%;
+  width: 60%;
   height: 100%;
   background-color: #fff;
   border-radius: 10px;
@@ -997,7 +998,7 @@ html {
   background-color: #fff;
 }
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1253px) {
   .teaching .teaching_content {
     width: 100%;
   }
