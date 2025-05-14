@@ -131,6 +131,11 @@ html {
 .header .header_content .menu_language .menu_language_content .nav-menu .menu_content ul li a {
   color: #fff;
   text-decoration: none;
+  transition: all 0.8s ease;
+}
+
+.header .header_content .menu_language .menu_language_content .nav-menu .menu_content ul li a:hover {
+  color: #0084FF;
 }
 
 .header .header_content .menu_language .menu_language_content .show {
@@ -254,7 +259,17 @@ html {
 
 .banner .banner_content img {
   width: 100%;
-  height: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .banner .banner_content {
+    height: 450px;
+    background: url("../images/Banner_0.webp");
+    background-size: cover;
+  }
+  .banner .banner_content img {
+    display: none;
+  }
 }
 
 .management {
@@ -295,7 +310,7 @@ html {
 .management .management_content .management_title .management_title_content h1::before {
   content: '';
   position: absolute;
-  top: -30px;
+  top: -20px;
   width: 200px;
   display: inline-block;
   border-top: 4px solid #01223F;
@@ -304,7 +319,7 @@ html {
 .management .management_content .management_title .management_title_content h1::after {
   content: '';
   position: absolute;
-  bottom: -30px;
+  bottom: -20px;
   width: 110px;
   display: inline-block;
   border-top: 4px solid #01223F;
@@ -477,7 +492,7 @@ html {
 
 .welcome_to_antplay .welcome_to_antplay_img .welcome_to_antplay_img_content {
   margin: 0 auto;
-  transform: scale(1.8);
+  transform: scale(1.3);
   background-color: #000;
 }
 
@@ -492,8 +507,8 @@ html {
 }
 
 .welcome_to_antplay .welcome_to_antplay_img .welcome_to_antplay_img_content .image_container .image_container_box {
-  width: 110px;
-  height: 110px;
+  width: 160px;
+  height: 200px;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 6px;

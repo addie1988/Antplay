@@ -131,6 +131,11 @@ html {
 .header .header_content .menu_language .menu_language_content .nav-menu .menu_content ul li a {
   color: #fff;
   text-decoration: none;
+  transition: all 0.8s ease;
+}
+
+.header .header_content .menu_language .menu_language_content .nav-menu .menu_content ul li a:hover {
+  color: #0084FF;
 }
 
 .header .header_content .menu_language .menu_language_content .show {
@@ -254,7 +259,17 @@ html {
 
 .banner .banner_content img {
   width: 100%;
-  height: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .banner .banner_content {
+    height: 450px;
+    background: url("../images/Banner_0.webp");
+    background-size: cover;
+  }
+  .banner .banner_content img {
+    display: none;
+  }
 }
 
 .management {
@@ -295,7 +310,7 @@ html {
 .management .management_content .management_title .management_title_content h1::before {
   content: '';
   position: absolute;
-  top: -30px;
+  top: -20px;
   width: 200px;
   display: inline-block;
   border-top: 4px solid #01223F;
@@ -304,7 +319,7 @@ html {
 .management .management_content .management_title .management_title_content h1::after {
   content: '';
   position: absolute;
-  bottom: -30px;
+  bottom: -20px;
   width: 110px;
   display: inline-block;
   border-top: 4px solid #01223F;
@@ -983,7 +998,7 @@ html {
   color: #fff;
   font-size: 24px;
   background-color: #01223F;
-  padding: 20px 150px;
+  padding: 12px 150px;
   border-radius: 50px;
   display: inline-block;
   text-decoration: none;
@@ -1030,9 +1045,9 @@ html {
 
 @media screen and (max-width: 460px) {
   .teaching .teaching_content .game_details .game_details_content .game_details_img .game_details_img_content img {
-    width: 90%;
+    width: 80%;
   }
   .teaching .teaching_content .try_it .try_it_content a {
-    padding: 14px 50px;
+    padding: 12px 50px;
   }
 }
