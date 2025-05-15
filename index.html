@@ -9,9 +9,83 @@
     <link rel="icon" href="./images/favicon.png" />
     <title>Antplay</title>
     <link rel="stylesheet" href="./css/style.css">
+    
+    <!-- Google 翻譯功能 -->
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'zh-TW,ja,pt',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        // 翻譯函數
+        function doTranslate(lang_pair) {
+            if (typeof google != 'undefined' && google.translate) {
+                var gt = google.translate._getMainTranslateWebElement();
+                var sel = gt.getElementsByTagName('select')[0];
+                for (var i = 0; i < sel.options.length; i++) {
+                    if (sel.options[i].value == lang_pair) {
+                        sel.selectedIndex = i;
+                        if (sel.fireEvent) {
+                            sel.fireEvent('onchange');
+                        } else {
+                            var evt = document.createEvent('HTMLEvents');
+                            evt.initEvent('change', false, true);
+                            sel.dispatchEvent(evt);
+                        }
+                        break;
+                    }
+                }
+                // 關閉下拉選單
+                document.getElementById('dropdownMenu').classList.remove('show');
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <style>
+        /* 隱藏 Google Translate 元素 */
+        .goog-te-banner-frame,
+        .goog-te-gadget-icon,
+        .goog-te-menu-value span,
+        .goog-te-gadget span,
+        .goog-te-balloon-frame,
+        .goog-tooltip,
+        .goog-tooltip:hover,
+        .goog-text-highlight {
+            display: none !important;
+        }
+        
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0 !important;
+        }
+
+        .goog-te-gadget .goog-te-combo {
+            color: black !important;
+            position: absolute;
+            top: -1000px;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        #google_translate_element {
+            position: absolute;
+            top: -1000px;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="google_translate_element"></div>
 
     <div class="spacer" id="spacer"></div>
     <div class="header" id="header">
@@ -42,13 +116,13 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
+                                <a href="javascript:doTranslate('en|zh-TW')"><img src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
-                                <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
+                                <a href="javascript:doTranslate('en|ja')"><img src="./images/icon_3.svg" alt="icon_3">
                                     <p>日本語</p>
                                 </a>
-                                <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
+                                <a href="javascript:doTranslate('en|pt')"><img src="./images/icon_4.svg" alt="icon_4">
                                     <p>Português</p>
                                 </a>
                             </div>
