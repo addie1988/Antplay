@@ -492,7 +492,7 @@ html {
 
 .welcome_to_antplay .welcome_to_antplay_img .welcome_to_antplay_img_content {
   margin: 0 auto;
-  transform: scale(1.8);
+  transform: scale(1.3);
   background-color: #000;
 }
 
@@ -507,8 +507,8 @@ html {
 }
 
 .welcome_to_antplay .welcome_to_antplay_img .welcome_to_antplay_img_content .image_container .image_container_box {
-  width: 110px;
-  height: 110px;
+  width: 160px;
+  height: 200px;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 6px;
@@ -909,7 +909,7 @@ html {
 .teaching .teaching_content {
   margin: 0 auto;
   width: 1200px;
-  padding-top: 100px;
+  padding: 100px 0;
 }
 
 .teaching .teaching_content .game_details {
@@ -984,28 +984,32 @@ html {
   padding-right: 4px;
 }
 
-.teaching .teaching_content .try_it {
-  position: relative;
-  padding: 100px 0;
+.teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content ul li:nth-child(5) {
+  padding-right: 0;
 }
 
-.teaching .teaching_content .try_it .try_it_content {
+.teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content .try_it {
+  position: relative;
+  padding-top: 60px;
+}
+
+.teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content .try_it .try_it_content {
   margin: 0 auto;
   text-align: center;
 }
 
-.teaching .teaching_content .try_it .try_it_content a {
+.teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content .try_it .try_it_content a {
+  width: 100%;
   color: #fff;
   font-size: 24px;
   background-color: #01223F;
-  padding: 12px 150px;
-  border-radius: 50px;
+  border-radius: 4px;
   display: inline-block;
   text-decoration: none;
   transition: all 1s ease-in-out;
 }
 
-.teaching .teaching_content .try_it .try_it_content a:hover {
+.teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content .try_it .try_it_content a:hover {
   border: 3px solid #01223F;
   color: #01223F;
   background: none;
@@ -1026,6 +1030,21 @@ html {
   .teaching .teaching_content .game_details .game_details_content .game_details_text {
     width: 90%;
   }
+  .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content {
+    text-align: center;
+  }
+  .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    line-height: 2.6;
+  }
+  .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content ul li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-right: 0;
+  }
 }
 
 @media screen and (max-width: 794px) {
@@ -1035,19 +1054,10 @@ html {
   .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content {
     padding: 30px;
   }
-  .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content ul {
-    line-height: 3;
-  }
-  .teaching .teaching_content .game_details .game_details_content .game_details_text .game_details_text_content ul li {
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 460px) {
   .teaching .teaching_content .game_details .game_details_content .game_details_img .game_details_img_content img {
     width: 80%;
-  }
-  .teaching .teaching_content .try_it .try_it_content a {
-    padding: 12px 50px;
   }
 }
