@@ -6,8 +6,6 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google" content="translate">
-    <meta name="translator" content="auto">
     <link rel="icon" href="./images/favicon.png" />
     <title>Antplay</title>
     <link rel="stylesheet" href="./css/style.css">
@@ -45,13 +43,13 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#" onclick="translatePage('zh')"><img src="./images/icon_2.svg" alt="icon_2">
+                                <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
-                                <a href="#" onclick="translatePage('ja')"><img src="./images/icon_3.svg" alt="icon_3">
+                                <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
                                     <p>日本語</p>
                                 </a>
-                                <a href="#" onclick="translatePage('pt')"><img src="./images/icon_4.svg" alt="icon_4">
+                                <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
                                     <p>Português</p>
                                 </a>
                             </div>
@@ -751,59 +749,6 @@
 
 
     <script src="./js/main.js"></script>
-    <script>
-        function translatePage(lang) {
-            // 設置目標語言
-            const languageMap = {
-                'zh': '中文',
-                'ja': '日本語',
-                'pt': 'Português'
-            };
-
-            // 強制觸發瀏覽器翻譯
-            if (lang !== 'en') {
-                // 移除任何現有的翻譯相關元素
-                const existingFrame = document.querySelector('.skiptranslate');
-                if (existingFrame) {
-                    existingFrame.remove();
-                }
-
-                // 修改頁面語言以觸發翻譯
-                document.documentElement.lang = 'en';  // 先設置為英文
-                setTimeout(() => {
-                    document.documentElement.lang = lang;  // 然後設置為目標語言
-                    
-                    // 創建並觸發自定義事件
-                    const event = new CustomEvent('translate', { 
-                        detail: { language: languageMap[lang] } 
-                    });
-                    document.dispatchEvent(event);
-                    
-                    // 使用瀏覽器內建翻譯API
-                    if (chrome && chrome.i18n && chrome.i18n.detectLanguage) {
-                        chrome.i18n.detectLanguage(document.documentElement.innerHTML, (result) => {
-                            if (result && result.languages) {
-                                document.documentElement.setAttribute('translate', 'yes');
-                            }
-                        });
-                    } else {
-                        // 對於非Chrome瀏覽器，使用替代方法
-                        const iframe = document.createElement('iframe');
-                        iframe.style.display = 'none';
-                        iframe.src = `javascript:void(
-                            window.parent.document.documentElement.setAttribute('translate', 'yes');
-                            window.parent.document.documentElement.lang='${lang}';
-                        )`;
-                        document.body.appendChild(iframe);
-                        setTimeout(() => iframe.remove(), 100);
-                    }
-                }, 100);
-            }
-
-            // 關閉下拉選單
-            document.getElementById('dropdownMenu').classList.remove('show');
-        }
-    </script>
 
 </body>
 
