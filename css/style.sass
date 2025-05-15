@@ -285,7 +285,6 @@ html
                         object-fit: cover
                         display: block
                         transition: transform 1s ease-in-out
-                        border-radius: 6px
                 .active
                     img
                         transform: scale(1.4)
@@ -296,9 +295,11 @@ html
                 transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out
                 font-size: 16px
                 display: flex
+                justify-content: center
                 align-items: center
                 p
                     text-align: center
+                    line-height: 2.5
             .visible
                 opacity: 1
                 width: 100%
@@ -534,11 +535,12 @@ html
                                 @extend %display_flex
                                 .games_box_area_text_content
                                     text-align: center
-                                    line-height: 3
+                                    line-height: 6
                                     p
                                         color: #fff
                                         font-size: 25px
                                         text-align: center
+                                        line-height: 1
                                     span
                                         color: $main_color
                                         font-size: 22px
@@ -546,6 +548,7 @@ html
                                         padding: 4px 60px
                                         border-radius: 100px
                                         transition: all 1s ease
+                                        margin-top: 100px
                     &:hover
                         .games_box_area
                             &::after

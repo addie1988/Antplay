@@ -358,7 +358,6 @@ html {
   object-fit: cover;
   display: block;
   transition: transform 1s ease-in-out;
-  border-radius: 6px;
 }
 
 .management .management_content .container .image-row .active img {
@@ -372,11 +371,13 @@ html {
   transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
   font-size: 16px;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .management .management_content .container .text-box p {
   text-align: center;
+  line-height: 2.5;
 }
 
 .management .management_content .container .visible {
@@ -668,13 +669,14 @@ html {
 
 .games .games_content .games_box .games_box_content a .games_box_area .games_box_area_content .games_box_area_text .games_box_area_text_content {
   text-align: center;
-  line-height: 3;
+  line-height: 6;
 }
 
 .games .games_content .games_box .games_box_content a .games_box_area .games_box_area_content .games_box_area_text .games_box_area_text_content p {
   color: #fff;
   font-size: 25px;
   text-align: center;
+  line-height: 1;
 }
 
 .games .games_content .games_box .games_box_content a .games_box_area .games_box_area_content .games_box_area_text .games_box_area_text_content span {
@@ -684,6 +686,7 @@ html {
   padding: 4px 60px;
   border-radius: 100px;
   transition: all 1s ease;
+  margin-top: 100px;
 }
 
 .games .games_content .games_box .games_box_content a:hover .games_box_area::after {
