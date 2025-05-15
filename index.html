@@ -13,6 +13,8 @@
 
 <body>
 
+    <div id="google_translate_element"></div>
+
     <div class="spacer" id="spacer"></div>
     <div class="header" id="header">
         <div class="header_content">
@@ -42,15 +44,17 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
-                                    <p>中文</p>
-                                </a>
-                                <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
-                                    <p>日本語</p>
-                                </a>
-                                <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
-                                    <p>Português</p>
-                                </a>
+                                <div id="custom_translate">
+                                    <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
+                                        <p>中文</p>
+                                    </a>
+                                    <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
+                                        <p>日本語</p>
+                                    </a>
+                                    <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
+                                        <p>Português</p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -746,7 +750,10 @@
 
 
 
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
     <script src="./js/main.js"></script>
+
 </body>
 
 </html>
