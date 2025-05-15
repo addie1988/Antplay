@@ -9,11 +9,11 @@
     <link rel="icon" href="./images/favicon.png" />
     <title>Antplay</title>
     <link rel="stylesheet" href="./css/style.css">
-    
+
     <!-- Google 翻譯功能 -->
     <script type="text/javascript">
         var googTrans = null;
-        
+
         function googleTranslateElementInit() {
             googTrans = new google.translate.TranslateElement({
                 pageLanguage: 'en',
@@ -26,17 +26,17 @@
         function changeLanguage(langCode) {
             // 關閉下拉選單
             document.getElementById('dropdownMenu').classList.remove('show');
-            
+
             // 設置 cookie
             document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.host}`;
             document.cookie = `googtrans=/en/${langCode}; path=/`;
-            
+
             // 重新加載翻譯
             location.reload();
         }
 
         // 在頁面加載時檢查並應用已保存的語言設置
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // 檢查 URL 參數
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang');
@@ -45,8 +45,9 @@
             }
         });
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
         /* 隱藏 Google Translate 元素 */
         .goog-te-banner-frame,
@@ -65,16 +66,16 @@
         .VIpgJd-ZVi9od-l4eHX-hSRGPd {
             display: none !important;
         }
-        
+
         body {
             top: 0 !important;
             position: static !important;
         }
-        
+
         .translated-ltr {
             margin-top: 0 !important;
         }
-        
+
         #google_translate_element {
             position: absolute !important;
             top: -1000px !important;
@@ -128,8 +129,8 @@
                         <div class="menu_content">
                             <ul>
                                 <li><a href="./index.html">Home</a></li>
-                                <li><a class="scroll-link" href="#games">Games</a></li>
                                 <li><a class="scroll-link" href="#company">Company</a></li>
+                                <li><a class="scroll-link" href="#games">Games</a></li>
                                 <li><a class="scroll-link" href="#connect">Connect</a></li>
                             </ul>
                         </div>
@@ -140,13 +141,20 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img src="./images/icon_2.svg" alt="icon_2">
+                                <a href="#" onclick="changeLanguage('en'); return false;"><img src="./images/icon_1.svg"
+                                        alt="icon_1">
+                                    <p>English</p>
+                                </a>
+                                <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img
+                                        src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
-                                <a href="#" onclick="changeLanguage('ja'); return false;"><img src="./images/icon_3.svg" alt="icon_3">
+                                <a href="#" onclick="changeLanguage('ja'); return false;"><img src="./images/icon_3.svg"
+                                        alt="icon_3">
                                     <p>日本語</p>
                                 </a>
-                                <a href="#" onclick="changeLanguage('pt'); return false;"><img src="./images/icon_4.svg" alt="icon_4">
+                                <a href="#" onclick="changeLanguage('pt'); return false;"><img src="./images/icon_4.svg"
+                                        alt="icon_4">
                                     <p>Português</p>
                                 </a>
                             </div>
@@ -175,25 +183,117 @@
                 </div>
             </div>
             <div class="container">
-                <div class="image-row">
-                    <div class="img-box"
-                        data-text="We have a huge library of slot games covering all types of popular games, from classic three-axis slots to high quality 5-axis video games, catering to the diverse needs of players around the world.">
-                        <img src="./images/management_1.png" alt="願景一">
-                    </div>
-                    <div class="img-box"
-                        data-text="Our games meet regulatory requirements in multiple markets around the world, ensuring that your platform can operate legally, and support multiple language and currency options to help you easily access international markets. is legal and supports multiple language and currency options to help you easily access international markets.">
-                        <img src="./images/management_2.png" alt="願景二">
-                    </div>
-                    <div class="img-box"
-                        data-text="We offer a full range of marketing support, including free spins, reward systems, leaderboards and jackpot pools to help you generate interest, increase engagement and retention, and increase revenue on your platform.">
-                        <img src="./images/management_3.png" alt="願景三">
-                    </div>
-                    <div class="img-box"
-                        data-text="We provide easy API and platform integration to ensure your system is up and running quickly and seamlessly. Our technical team provides 7x24 hours support to ensure that all games run smoothly.">
-                        <img src="./images/management_4.png" alt="願景四">
+                <div class="container_content">
+                    <div class="data_report">
+                        <div class="data_report_content">
+                            <div class="data_report_ul">
+                                <div class="data_report_ul_content">
+                                    <ul>
+                                        <li>
+                                            <h1 data-target="144">0</h1>
+                                            <span>Games</span>
+                                        </li>
+                                        <li>
+                                            <h1 data-target="44">0</h1>
+                                            <span>Languages</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="data_report_content_text">
+                                    <div class="data_report_content_text_content">
+                                        <p>As a game changer in the mobile gaming industry, PG SOFT® has made a massive
+                                            impact on the gaming world since its inception in 2015.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="data_carousel">
+                                <div class="data_carousel_content">
+
+                                    <canvas id="canvas"></canvas>
+
+                                    <div class="content-wrapper">
+                                        <div class="content-block">區塊內容 1：數位創作</div>
+                                        <div class="content-block">區塊內容 2：品牌設計</div>
+                                        <div class="content-block">區塊內容 3：社群經營</div>
+                                        <div class="content-block">區塊內容 4：互動體驗</div>
+                                        <div class="content-block">區塊內容 5：影片剪輯</div>
+                                        <div class="content-block">區塊內容 6：3D 動畫</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="report">
+                                <div class="report_content">
+                                    <ul>
+                                        <li>
+                                            <div class="report_li_title">
+                                                <div class="report_li_title_content">
+                                                    <div class="report_li_title_h1">
+                                                        <div class="report_li_title_h1_content">
+                                                            <h1>103</h1>
+                                                            <b></b>
+                                                            <span>CUSTOMERS IN 103 COUNTRIES</span>
+                                                        </div>
+                                                    </div>
+                                                    <svg id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg"
+                                                        version="1.1" viewBox="0 0 321 321">
+                                                        <!-- Generator: Adobe Illustrator 29.5.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 137)  -->
+                                                        <defs>
+                                                            <style>
+                                                                .st0 {
+                                                                    fill: #ff3d6a;
+                                                                }
+
+                                                                .st1 {
+                                                                    fill: #9c38e6;
+                                                                }
+
+                                                                .st2 {
+                                                                    fill: #f59f21;
+                                                                }
+
+                                                                .st3 {
+                                                                    fill: #5db7fe;
+                                                                }
+
+                                                                .st4 {
+                                                                    fill: #f2de51;
+                                                                }
+                                                            </style>
+                                                        </defs>
+                                                        <path class="st4"
+                                                            d="M160.82,70.58c.17,0,.33,0,.49,0L161.11-.04c-.1,0-.19,0-.29,0C121.27-.05,85.07,14.27,57.1,37.98l46.29,53.35c15.58-12.96,35.6-20.75,57.44-20.75Z" />
+                                                        <path class="st0"
+                                                            d="M161.11-.04l.21,70.63c49.41.27,89.38,40.4,89.38,89.87,0,26.42-11.4,50.17-29.54,66.61l46.29,53.34c33.05-29.4,53.88-72.24,53.88-119.96C321.32,71.91,249.62.11,161.11-.04Z" />
+                                                        <path class="st3"
+                                                            d="M103.38,91.33l-46.29-53.35C33.75,57.78,16.14,84.12,7.1,114.18l68.01,19.16c5.25-16.61,15.19-31.13,28.27-42.01Z" />
+                                                        <path class="st2"
+                                                            d="M160.82,250.33c-49.52,0-89.69-40.06-89.87-89.54L.36,163.19c1.46,87.38,72.74,157.76,160.47,157.76,40.93,0,78.27-15.33,106.62-40.54l-46.29-53.34c-15.95,14.46-37.11,23.26-60.33,23.26Z" />
+                                                        <path class="st1"
+                                                            d="M70.95,160.45c0-9.45,1.46-18.55,4.17-27.11L7.1,114.18c-4.4,14.65-6.78,30.18-6.78,46.27,0,.92.02,1.83.03,2.74l70.59-2.4c0-.11,0-.22,0-.34Z" />
+                                                        <polygon class="st1"
+                                                            points="161.57 157.7 161.57 157.7 160.78 157.48 160.99 157.72 161.57 157.7" />
+                                                        <polygon class="st1"
+                                                            points="161.57 157.7 161.57 157.7 161.57 157.7 161.57 157.7" />
+                                                    </svg>
+                                                    <div class="report_color">
+                                                        <div class="report_color_content">
+                                                            <span></span>
+                                                            <p>ASIA</p>
+                                                        </div>
+                                                        <span>42%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div id="textBox" class="text-box">請將滑鼠移到圖片上</div>
             </div>
         </div>
     </div>
