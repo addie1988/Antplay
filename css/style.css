@@ -465,6 +465,7 @@ html {
   font-size: 22px;
   text-align: center;
   padding: 60px 0;
+  line-height: 1.5;
 }
 
 .welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures .customer_service_text_and_pictures_content img {
@@ -815,6 +816,7 @@ html {
   font-size: 16px;
   color: #fff;
   margin-top: 10px;
+  line-height: 1.5;
 }
 
 .footer .footer_content .copyright {
