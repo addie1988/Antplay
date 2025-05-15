@@ -182,4 +182,22 @@ animate(); // 啟動動畫
 
 // ----------------------------------------------------------------------------------------
 
+// 自訂語言選單控制
 
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'zh-TW,ja,pt',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+
+
+document.getElementById("custom_translate").addEventListener("change", function () {
+  var lang = this.value;
+  var googleCombo = document.querySelector(".goog-te-combo");
+  if (googleCombo && lang) {
+    googleCombo.value = lang;
+    googleCombo.dispatchEvent(new Event("change"));
+  }
+});
