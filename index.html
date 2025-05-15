@@ -45,17 +45,15 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <div id="languageSelect">
-                                    <option value="zh-TW"><img src="./images/icon_2.svg" alt="icon_2">
-                                        <p>中文</p>
-                                    </option>
-                                    <option value="ja"><img src="./images/icon_3.svg" alt="icon_3">
-                                        <p>日本語</p>
-                                    </option>
-                                    <option value="pt"><img src="./images/icon_4.svg" alt="icon_4">
-                                        <p>Português</p>
-                                    </option>
-                                </div>
+                                <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
+                                    <p>中文</p>
+                                </a>
+                                <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
+                                    <p>日本語</p>
+                                </a>
+                                <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
+                                    <p>Português</p>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -753,56 +751,6 @@
 
 
     <script src="./js/main.js"></script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'zh-TW',
-                includedLanguages: 'zh-TW,ja,pt',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        window.onload = function () {
-            var select = document.getElementById('languageSelect');
-            var currentLang = '';
-
-            select.addEventListener('change', function () {
-                var lang = this.value;
-                if (!lang || lang === currentLang) return;
-                currentLang = lang;
-
-                var iframe = document.querySelector('iframe.goog-te-menu-frame');
-                if (!iframe) {
-                    alert('Google 翻譯元件尚未載入，請稍候再試。');
-                    return;
-                }
-
-                var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                var langItems = innerDoc.querySelectorAll('.goog-te-menu2-item span.text');
-
-                for (var i = 0; i < langItems.length; i++) {
-                    if (langItems[i].innerText.toLowerCase().indexOf(lang.toLowerCase()) > -1 ||
-                        langItems[i].innerText == getLanguageName(lang)) {
-                        langItems[i].click();
-                        break;
-                    }
-                }
-            });
-        };
-
-        function getLanguageName(code) {
-            switch (code) {
-                case 'zh-TW': return '繁體中文';
-                case 'ja': return '日本語';
-                case 'pt': return '葡萄牙語';
-                default: return '';
-            }
-        }
-    </script>
-
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 
 </html>
