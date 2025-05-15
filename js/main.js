@@ -89,7 +89,7 @@ function startCarousel() {
   intervalId = setInterval(() => {
     currentIndex = (currentIndex + 1) % boxes.length;
     showImage(currentIndex);
-  }, 3000);
+  }, 7000);
 }
 
 function stopCarousel() {
