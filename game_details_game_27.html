@@ -7,9 +7,107 @@
     <link rel="icon" href="./images/favicon.png" />
     <title>Sherlock of Baker Stree</title>
     <link rel="stylesheet" href="./css/game_details_style.css">
+
+  <!-- Google 翻譯功能 -->
+    <script type="text/javascript">
+        var googTrans = null;
+        
+        function googleTranslateElementInit() {
+            googTrans = new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'zh-TW,ja,pt',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            // 關閉下拉選單
+            document.getElementById('dropdownMenu').classList.remove('show');
+            
+            // 設置 cookie
+            document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.host}`;
+            document.cookie = `googtrans=/en/${langCode}; path=/`;
+            
+            // 重新加載翻譯
+            location.reload();
+        }
+
+        // 在頁面加載時檢查並應用已保存的語言設置
+        window.addEventListener('load', function() {
+            // 檢查 URL 參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang');
+            if (lang) {
+                changeLanguage(lang);
+            }
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <style>
+        /* 隱藏 Google Translate 元素 */
+        .goog-te-banner-frame,
+        .goog-te-gadget-simple,
+        .goog-te-menu-frame,
+        .goog-te-menu-value,
+        .goog-te-gadget span,
+        .goog-te-balloon-frame,
+        .goog-tooltip,
+        .goog-tooltip:hover,
+        .goog-text-highlight,
+        .VIpgJd-ZVi9od-ORHb,
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .VIpgJd-ZVi9od-SmfZ-OEVmcd,
+        .VIpgJd-ZVi9od-vH1Gmf,
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd {
+            display: none !important;
+        }
+        
+        body {
+            top: 0 !important;
+            position: static !important;
+        }
+        
+        .translated-ltr {
+            margin-top: 0 !important;
+        }
+        
+        #google_translate_element {
+            position: absolute !important;
+            top: -1000px !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        .VIpgJd-ZVi9od-ORHb {
+            background: transparent !important;
+            box-shadow: none !important;
+            position: absolute !important;
+            top: -9999px !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+        }
+
+        .VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
+            display: none !important;
+        }
+
+        .VIpgJd-ZVi9od-aZ2wEe-OiiCO {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            height: 0 !important;
+            overflow: hidden !important;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="google_translate_element"></div>
 
 
     <div class="spacer" id="spacer"></div>
@@ -40,13 +138,13 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
+                                <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
-                                <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
+                                <a href="#" onclick="changeLanguage('ja'); return false;"><img src="./images/icon_3.svg" alt="icon_3">
                                     <p>日本語</p>
                                 </a>
-                                <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
+                                <a href="#" onclick="changeLanguage('pt'); return false;"><img src="./images/icon_4.svg" alt="icon_4">
                                     <p>Português</p>
                                 </a>
                             </div>
@@ -79,13 +177,13 @@
                     </div>
                     <div class="game_details_text">
                         <div class="game_details_text_content">
-                            <span>遊戲類型</span>
-                            <p>老虎機、滾輪遊戲、2D 遊戲</p>
+                            <span>Game Type</span>
+                            <p>Slot Machine, Reel Game, 2D Game</p>
                             <b></b>
-                            <span>遊戲機制</span>
-                            <p>當盤面上 5 軸內合計出現 3 個 南天門符號，即可觸免費遊戲，免費遊戲中會隨機轉換物件讓不可能變成可能，遊戲提供多樣化的購買特色內容，玩家可自由選擇特色玩法。遊戲內有多種突如其來小驚喜，有機會讓獎金翻倍，進一步提升獲勝機率與樂趣！</p>
+                            <span>Game Mechanics</span>
+                            <p>When 3 South Gate symbols appear across the 5 reels on the game screen, it triggers the free game feature. During free games, objects will be randomly transformed, making the impossible possible. The game offers various purchasable special features, allowing players to freely choose their preferred special gameplay. There are multiple surprise elements within the game that can potentially double your winnings, further increasing the chances of winning and enjoyment!</p>
                             <b></b>
-                            <span>支援系統</span>
+                            <span>Supported Systems</span>
                             <ul>
                                 <li><img src="./images/android.svg" alt="android">Android</li>
                                 <li><img src="./images/html5.svg" alt="html5">HTML5</li>
@@ -94,19 +192,19 @@
                                 <li><img src="./images/windows.svg" alt="windows">Windows</li>
                             </ul>
                             <b></b>
-                            <span>支援語言</span>
+                            <span>Supported Languages</span>
                             <ul>
-                                <li>繁體中文 </li>
-                                <li>简体中文 </li>
+                                <li>Traditional Chinese</li>
+                                <li>Simplified Chinese</li>
                                 <li>English</li>
                             </ul>
+                            <div class="try_it">
+                                <div class="try_it_content">
+                                    <a href="https://antplay.com/web/#/game-play">Play Now</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="try_it">
-                <div class="try_it_content">
-                    <a href="https://antplay.com/web/#/game-play">Play Now</a>
                 </div>
             </div>
         </div>

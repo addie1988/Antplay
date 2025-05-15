@@ -7,9 +7,107 @@
     <link rel="icon" href="./images/favicon.png" />
     <title>privacy</title>
     <link rel="stylesheet" href="./css/privacy_style.css">
+
+     <!-- Google 翻譯功能 -->
+    <script type="text/javascript">
+        var googTrans = null;
+        
+        function googleTranslateElementInit() {
+            googTrans = new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'zh-TW,ja,pt',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            // 關閉下拉選單
+            document.getElementById('dropdownMenu').classList.remove('show');
+            
+            // 設置 cookie
+            document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.host}`;
+            document.cookie = `googtrans=/en/${langCode}; path=/`;
+            
+            // 重新加載翻譯
+            location.reload();
+        }
+
+        // 在頁面加載時檢查並應用已保存的語言設置
+        window.addEventListener('load', function() {
+            // 檢查 URL 參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang');
+            if (lang) {
+                changeLanguage(lang);
+            }
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <style>
+        /* 隱藏 Google Translate 元素 */
+        .goog-te-banner-frame,
+        .goog-te-gadget-simple,
+        .goog-te-menu-frame,
+        .goog-te-menu-value,
+        .goog-te-gadget span,
+        .goog-te-balloon-frame,
+        .goog-tooltip,
+        .goog-tooltip:hover,
+        .goog-text-highlight,
+        .VIpgJd-ZVi9od-ORHb,
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .VIpgJd-ZVi9od-SmfZ-OEVmcd,
+        .VIpgJd-ZVi9od-vH1Gmf,
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd {
+            display: none !important;
+        }
+        
+        body {
+            top: 0 !important;
+            position: static !important;
+        }
+        
+        .translated-ltr {
+            margin-top: 0 !important;
+        }
+        
+        #google_translate_element {
+            position: absolute !important;
+            top: -1000px !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        .VIpgJd-ZVi9od-ORHb {
+            background: transparent !important;
+            box-shadow: none !important;
+            position: absolute !important;
+            top: -9999px !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+        }
+
+        .VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
+            display: none !important;
+        }
+
+        .VIpgJd-ZVi9od-aZ2wEe-OiiCO {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            height: 0 !important;
+            overflow: hidden !important;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="google_translate_element"></div>
 
     <div class="spacer" id="spacer"></div>
     <div class="header" id="header">
@@ -39,13 +137,13 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#"><img src="./images/icon_2.svg" alt="icon_2">
+                                <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
-                                <a href="#"><img src="./images/icon_3.svg" alt="icon_3">
+                                <a href="#" onclick="changeLanguage('ja'); return false;"><img src="./images/icon_3.svg" alt="icon_3">
                                     <p>日本語</p>
                                 </a>
-                                <a href="#"><img src="./images/icon_4.svg" alt="icon_4">
+                                <a href="#" onclick="changeLanguage('pt'); return false;"><img src="./images/icon_4.svg" alt="icon_4">
                                     <p>Português</p>
                                 </a>
                             </div>
@@ -71,7 +169,9 @@
                     <h6>Company Profile</h6>
                     <p><b>AntPlay N.V., Curaçao</b> (hereinafter referred to as "we," "us," or "our") complies with the
                         <b>Curaçao Personal Data Protection Act (2013).</b> This Privacy Policy is issued on behalf of
-                        the <b>AntPlay N.V., Curaçao</b> group of companies, which includes the website<a href="https://antplay.com/."><p>https://antplay.com/.</p>
+                        the <b>AntPlay N.V., Curaçao</b> group of companies, which includes the website<a
+                            href="https://antplay.com/.">
+                            <p>https://antplay.com/.</p>
                         </a>
                     </p>
 
@@ -199,7 +299,7 @@
                             <img src="./images/logo.svg" alt="logo">
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="footer_text">
