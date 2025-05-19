@@ -263,7 +263,8 @@ html {
   width: 958px;
   height: 558px;
   background: url("../images/Banner_2.png") no-repeat;
-  z-index: 3;
+  background-position: center;
+  z-index: 2;
   animation: shake 0.5s ease-in-out infinite;
 }
 
@@ -412,6 +413,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel {
   position: relative;
+  padding: 160px 0 280px 0;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content {
@@ -423,9 +425,11 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content canvas {
   position: relative;
-  width: 200%;
-  padding: 100px 0;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: block;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content .content-wrapper {
@@ -449,7 +453,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content .content-wrapper .content-block img {
   border-radius: 20px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content .content-wrapper .active {
@@ -480,7 +484,7 @@ html {
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_1_box .report_li_1_title {
   height: 585.5px;
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
   display: flex;
@@ -586,7 +590,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_1_box .report_li_6_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
   margin-top: 20px;
@@ -691,7 +695,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_2_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
 }
@@ -765,7 +769,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_4_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
   margin-top: 20px;
@@ -806,6 +810,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_4_title .report_li_4_title_content .report_li_4_img {
   display: flex;
+  justify-content: center;
   max-width: 700px;
   margin: auto;
   gap: 20px;
@@ -845,7 +850,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_7_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
   margin-top: 20px;
@@ -938,7 +943,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_3_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
 }
@@ -1072,7 +1077,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_5_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
   margin-top: 20px;
@@ -1122,21 +1127,27 @@ html {
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_5_title .report_li_5_title_content .carousel_container .carousel-track {
   display: flex;
   transition: transform 0.6s ease-in-out;
+  width: 300%;
+  gap: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_5_title .report_li_5_title_content .carousel_container .carousel-track .carousel-item {
-  flex: 0 0 auto;
-  width: 20px;
-  margin: 0 6px;
+  flex: 0 0 33.33%;
+  width: 33.33%;
+  margin: 0;
+  padding: 0;
   opacity: 0.2;
-  transition: opacity 0.3s;
+  transition: all 0.5s ease;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_5_title .report_li_5_title_content .carousel_container .carousel-track .carousel-item img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 2px solid white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -1146,7 +1157,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_8_title {
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e0e0e0;
   padding: 10px;
   border-radius: 20px;
   margin-top: 20px;
@@ -1242,11 +1253,11 @@ html {
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(10px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -1255,6 +1266,22 @@ html {
 @media screen and (max-width: 1190px) {
   .management .management_content {
     width: 90%;
+  }
+  .management .management_content .container .container_content {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .management .management_content .container .container_content .data_report .data_report_content .data_carousel {
+    padding: 0;
+  }
+  .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content {
+    height: 700px;
+  }
+  .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content canvas {
+    width: 170vw !important;
+    height: 170vh !important;
+    padding-bottom: 0;
+    padding: 100px 0;
   }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul {
     display: flex;
@@ -1333,6 +1360,9 @@ html {
 }
 
 @media screen and (max-width: 1300px) {
+  .management {
+    overflow: hidden;
+  }
   .management .management_content {
     width: 90%;
   }
@@ -1400,11 +1430,6 @@ html {
   width: 100%;
   height: 600px;
   overflow: hidden;
-}
-
-.welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures {
-  position: absolute;
-  bottom: 0;
 }
 
 .welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures .customer_service_text_and_pictures_content {
@@ -1732,6 +1757,10 @@ html {
 .footer .footer_content .footer_text .footer_text_content ul li {
   width: 100%;
   margin: 20px 0;
+}
+
+.footer .footer_content .footer_text .footer_text_content ul li a {
+  text-decoration: none;
 }
 
 .footer .footer_content .footer_text .footer_text_content ul li .contact_details {
