@@ -412,6 +412,7 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel {
   position: relative;
+  padding: 140px 0;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content {
@@ -1259,9 +1260,21 @@ html {
   .management .management_content {
     width: 90%;
   }
+  .management .management_content .container .container_content {
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .management .management_content .container .container_content .data_report .data_report_content .data_carousel {
+    padding: 0;
+  }
+  .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content {
+    height: 700px;
+  }
   .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content canvas {
     padding-bottom: 0;
     padding: 100px 0;
+    transform: scale(2.5);
   }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul {
     display: flex;
@@ -1407,11 +1420,6 @@ html {
   width: 100%;
   height: 600px;
   overflow: hidden;
-}
-
-.welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures {
-  position: absolute;
-  bottom: 0;
 }
 
 .welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures .customer_service_text_and_pictures_content {
