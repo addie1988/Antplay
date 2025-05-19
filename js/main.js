@@ -383,9 +383,9 @@ boxes.forEach((box, index) => {
 
 // report_li_5 硬幣輪播
 const coinImages = [
-  '/images/coin_1.svg',
-  '/images/coin_2.svg',
-  '/images/coin_3.svg'
+  './images/coin_1.svg',
+  './images/coin_2.svg',
+  './images/coin_3.svg'
 ];
 
 const track = document.getElementById('carouselTrack');
