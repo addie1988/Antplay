@@ -26,6 +26,27 @@
             // 關閉下拉選單
             document.getElementById('dropdownMenu').classList.remove('show');
             
+            // 更新語言圖標
+            const languageIcon = document.getElementById('languageIcon');
+            switch(langCode) {
+                case 'en':
+                    languageIcon.src = './images/icon_1.svg';
+                    languageIcon.alt = 'English';
+                    break;
+                case 'zh-TW':
+                    languageIcon.src = './images/icon_2.svg';
+                    languageIcon.alt = '中文';
+                    break;
+                case 'ja':
+                    languageIcon.src = './images/icon_3.svg';
+                    languageIcon.alt = '日本語';
+                    break;
+                case 'pt':
+                    languageIcon.src = './images/icon_4.svg';
+                    languageIcon.alt = 'Português';
+                    break;
+            }
+            
             // 設置 cookie
             document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.host}`;
             document.cookie = `googtrans=/en/${langCode}; path=/`;
@@ -36,6 +57,20 @@
 
         // 在頁面加載時檢查並應用已保存的語言設置
         window.addEventListener('load', function() {
+            // 檢查 cookie 中的語言設置
+            const cookies = document.cookie.split(';');
+            let currentLang = 'en'; // 默認語言
+            
+            for(let cookie of cookies) {
+                if(cookie.includes('googtrans')) {
+                    currentLang = cookie.split('/')[2];
+                    break;
+                }
+            }
+            
+            // 根據當前語言設置更新圖標
+            changeLanguage(currentLang);
+            
             // 檢查 URL 參數
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang');
@@ -135,10 +170,13 @@
                     </div>
                     <div class="language">
                         <div class="language_content">
-                            <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">
-                                <img src="./images/icon_1.svg" alt="icon_1">
+                            <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)" id="languageToggle">
+                                <img src="./images/icon_1.svg" alt="language_icon" id="languageIcon">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
+                                <a href="#" onclick="changeLanguage('en'); return false;"><img src="./images/icon_1.svg" alt="icon_1">
+                                    <p>English</p>
+                                </a>
                                 <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
@@ -159,9 +197,9 @@
 
     <!-- ---------------------------------------------------------------------------------------------- -->
 
-    <div class="banner">
+      <div class="banner">
         <div class="banner_content">
-            <img src="./images/Banner.webp" alt="Banner">
+            <img src="./images/Banner_1.jpg" alt="Banner">
         </div>
     </div>
 
@@ -179,7 +217,7 @@
                     <div class="game_details_text">
                         <div class="game_details_text_content">
                             <span>Game Type</span>
-                            <p>Slot Machine, Reel Game, 2D Game</p>
+                            <p>Slot Machine</p>
                             <b></b>
                             <span>Game Mechanics</span>
                             <p>When 3 South Gate symbols appear across the 5 reels on the game screen, it triggers the free game feature. During free games, objects will be randomly transformed, making the impossible possible. The game offers various purchasable special features, allowing players to freely choose their preferred special gameplay. There are multiple surprise elements within the game that can potentially double your winnings, further increasing the chances of winning and enjoyment!</p>
@@ -194,10 +232,11 @@
                             </ul>
                             <b></b>
                             <span>Supported Languages</span>
-                            <ul>
-                                <li>Traditional Chinese</li>
-                                <li>Simplified Chinese</li>
+                             <ul>
                                 <li>English</li>
+                                <li>Chinese</li>
+                                <li>Japanese</li>
+                                <li>Portuguese</li>
                             </ul>
                             <div class="try_it">
                                 <div class="try_it_content">
@@ -213,7 +252,7 @@
 
     <!-- ---------------------------------------------------------------------------------------------- -->
 
-    <div class="footer" id="connect">
+  <div class="footer" id="connect">
         <div class="footer_content">
             <div class="footer_logo">
                 <div class="footer_logo_content">
@@ -228,57 +267,7 @@
             <div class="footer_text">
                 <div class="footer_text_content">
                     <ul>
-                        <li>
-                            <div class="contact_details">
-                                <div class="contact_details_content">
-                                    <div class="contact_details_img">
-                                        <div class="contact_details_img_content">
-                                            <img src="./images/Component 7.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div class="contact_details_text">
-                                        <div class="contact_details_text_content">
-                                            <span>Real-time feature</span>
-                                            <p>Fast draw results with instant settlement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact_details">
-                                <div class="contact_details_content">
-                                    <div class="contact_details_img">
-                                        <div class="contact_details_img_content">
-                                            <img src="./images/Component 9.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div class="contact_details_text">
-                                        <div class="contact_details_text_content">
-                                            <span>Fairness</span>
-                                            <p>Random codes with free combinations.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact_details">
-                                <div class="contact_details_content">
-                                    <div class="contact_details_img">
-                                        <div class="contact_details_img_content">
-                                            <img src="./images/Component 8.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div class="contact_details_text">
-                                        <div class="contact_details_text_content">
-                                            <span>Fun factor</span>
-                                            <p>Diverse elements with a wide variety of themes.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+        
                         <li>
                             <a href="./privacy.html">
                                 <div class="contact_details">

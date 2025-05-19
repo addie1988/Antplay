@@ -8,10 +8,10 @@
     <title>God of Fortune</title>
     <link rel="stylesheet" href="./css/game_details_style.css">
 
-<!-- Google 翻譯功能 -->
+    <!-- Google 翻譯功能 -->
     <script type="text/javascript">
         var googTrans = null;
-        
+
         function googleTranslateElementInit() {
             googTrans = new google.translate.TranslateElement({
                 pageLanguage: 'en',
@@ -24,17 +24,17 @@
         function changeLanguage(langCode) {
             // 關閉下拉選單
             document.getElementById('dropdownMenu').classList.remove('show');
-            
+
             // 設置 cookie
             document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.host}`;
             document.cookie = `googtrans=/en/${langCode}; path=/`;
-            
+
             // 重新加載翻譯
             location.reload();
         }
 
         // 在頁面加載時檢查並應用已保存的語言設置
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // 檢查 URL 參數
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang');
@@ -43,8 +43,9 @@
             }
         });
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
         /* 隱藏 Google Translate 元素 */
         .goog-te-banner-frame,
@@ -63,16 +64,16 @@
         .VIpgJd-ZVi9od-l4eHX-hSRGPd {
             display: none !important;
         }
-        
+
         body {
             top: 0 !important;
             position: static !important;
         }
-        
+
         .translated-ltr {
             margin-top: 0 !important;
         }
-        
+
         #google_translate_element {
             position: absolute !important;
             top: -1000px !important;
@@ -138,13 +139,20 @@
                                 <img src="./images/icon_1.svg" alt="icon_1">
                             </a>
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img src="./images/icon_2.svg" alt="icon_2">
+                                <a href="#" onclick="changeLanguage('en'); return false;"><img src="./images/icon_1.svg"
+                                        alt="icon_1">
+                                    <p>English</p>
+                                </a>
+                                <a href="#" onclick="changeLanguage('zh-TW'); return false;"><img
+                                        src="./images/icon_2.svg" alt="icon_2">
                                     <p>中文</p>
                                 </a>
-                                <a href="#" onclick="changeLanguage('ja'); return false;"><img src="./images/icon_3.svg" alt="icon_3">
+                                <a href="#" onclick="changeLanguage('ja'); return false;"><img src="./images/icon_3.svg"
+                                        alt="icon_3">
                                     <p>日本語</p>
                                 </a>
-                                <a href="#" onclick="changeLanguage('pt'); return false;"><img src="./images/icon_4.svg" alt="icon_4">
+                                <a href="#" onclick="changeLanguage('pt'); return false;"><img src="./images/icon_4.svg"
+                                        alt="icon_4">
                                     <p>Português</p>
                                 </a>
                             </div>
@@ -158,9 +166,9 @@
 
     <!-- ---------------------------------------------------------------------------------------------- -->
 
-    <div class="banner">
+      <div class="banner">
         <div class="banner_content">
-            <img src="./images/Banner.webp" alt="Banner">
+            <img src="./images/Banner_1.jpg" alt="Banner">
         </div>
     </div>
 
@@ -177,11 +185,22 @@
                     </div>
                     <div class="game_details_text">
                         <div class="game_details_text_content">
+                            <span>Game Title</span>
+                            <p>Golden God of Wealth</p>
+                            <b></b>
                             <span>Game Type</span>
-                            <p>Slot Machine, Reel Game, 2D Game</p>
+                            <p>Slot Machine</p>
                             <b></b>
                             <span>Game Mechanics</span>
-                            <p>When 3 South Gate symbols appear across the 5 reels on the game screen, it triggers the free game feature. During free games, objects will be randomly transformed, making the impossible possible. The game offers various purchasable special features, allowing players to freely choose their preferred special gameplay. There are multiple surprise elements within the game that can potentially double your winnings, further increasing the chances of winning and enjoyment!</p>
+                            <p>
+                                243WAYS winning mechanism, as long as you connect, you will win. Every time you win, you
+                                can trigger a continuous explosion. The winnings will not stop, and the rewards will
+                                come one after another! After entering the free game, continuous explosions not only
+                                bring bonuses, but also upgrade high-multiple symbols after more than five consecutive
+                                explosions. Every moment of the rotation is full of surprises and explosive power!
+                                Continuous explosions and upgrades are in place once, come and experience the refreshing
+                                pleasure of winning points!
+                            </p>
                             <b></b>
                             <span>Supported Systems</span>
                             <ul>
@@ -194,9 +213,10 @@
                             <b></b>
                             <span>Supported Languages</span>
                             <ul>
-                                <li>Traditional Chinese</li>
-                                <li>Simplified Chinese</li>
                                 <li>English</li>
+                                <li>Chinese</li>
+                                <li>Japanese</li>
+                                <li>Portuguese</li>
                             </ul>
                             <div class="try_it">
                                 <div class="try_it_content">
@@ -212,7 +232,7 @@
 
     <!-- ---------------------------------------------------------------------------------------------- -->
 
-    <div class="footer" id="connect">
+  <div class="footer" id="connect">
         <div class="footer_content">
             <div class="footer_logo">
                 <div class="footer_logo_content">
@@ -221,63 +241,13 @@
                             <img src="./images/logo.svg" alt="logo">
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="footer_text">
                 <div class="footer_text_content">
                     <ul>
-                        <li>
-                            <div class="contact_details">
-                                <div class="contact_details_content">
-                                    <div class="contact_details_img">
-                                        <div class="contact_details_img_content">
-                                            <img src="./images/Component 7.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div class="contact_details_text">
-                                        <div class="contact_details_text_content">
-                                            <span>Real-time feature</span>
-                                            <p>Fast draw results with instant settlement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact_details">
-                                <div class="contact_details_content">
-                                    <div class="contact_details_img">
-                                        <div class="contact_details_img_content">
-                                            <img src="./images/Component 9.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div class="contact_details_text">
-                                        <div class="contact_details_text_content">
-                                            <span>Fairness</span>
-                                            <p>Random codes with free combinations.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact_details">
-                                <div class="contact_details_content">
-                                    <div class="contact_details_img">
-                                        <div class="contact_details_img_content">
-                                            <img src="./images/Component 8.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div class="contact_details_text">
-                                        <div class="contact_details_text_content">
-                                            <span>Fun factor</span>
-                                            <p>Diverse elements with a wide variety of themes.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+        
                         <li>
                             <a href="./privacy.html">
                                 <div class="contact_details">
