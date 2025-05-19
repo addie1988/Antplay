@@ -423,9 +423,11 @@ html {
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content canvas {
   position: relative;
-  width: 200%;
-  padding: 100px 0  180px 0;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: block;
 }
 
 .management .management_content .container .container_content .data_report .data_report_content .data_carousel .data_carousel_content .content-wrapper {
