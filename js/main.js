@@ -174,11 +174,8 @@ window.addEventListener('load', setLanguageIcon);
 
 // 數據報告 倒數
 const counters = document.querySelectorAll('.data_report_ul_content h1');
-let hasAnimated = false;
 
 function startCountAnimation() {
-  if (hasAnimated) return;
-
   counters.forEach(counter => {
     const target = parseInt(counter.getAttribute('data-target'));
     const duration = 2000; // Animation duration in milliseconds
@@ -198,23 +195,29 @@ function startCountAnimation() {
 
     updateCounter();
   });
-
-  hasAnimated = true;
 }
 
-// Intersection Observer to trigger animation when element is in view
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
+let isInView = false;
+
+// Scroll event listener to trigger animation when scrolling past 600px
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+
+  if (scrollPosition >= 300) {
+    if (!isInView) {
+      isInView = true;
       startCountAnimation();
     }
-  });
-}, { threshold: 0.5 });
-
-const counterSection = document.querySelector('.data_report_ul_content');
-if (counterSection) {
-  observer.observe(counterSection);
-}
+  } else {
+    if (isInView) {
+      isInView = false;
+      // Reset the counter text to 0 when scrolling back up
+      counters.forEach(counter => {
+        counter.textContent = '0';
+      });
+    }
+  }
+});
 
 // ----------------------------------------------------------------------------------------
 
@@ -232,9 +235,9 @@ window.addEventListener('resize', resize);
 resize();
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const particleCount = 300;
-const radius = 250;
-const focalLength = 500;
+const particleCount = 300; // 增加粒子數量使球體更密集
+const radius = Math.min(W, H) * 0.4; // 根據螢幕大小動態調整半徑
+const focalLength = 500; // 增加焦距讓3D效果更明顯
 const particles = [];
 
 const goldenRatio = (1 + Math.sqrt(5)) / 2;
@@ -312,7 +315,7 @@ function animate() {
     const scale = focalLength / (focalLength + rp.z * radius);
     const x2d = rp.x * radius * scale + W / 2;
     const y2d = rp.y * radius * scale + H / 2;
-    const size = scale * 30;
+    const size = scale * 40; // 增加字體大小
     const opacity = Math.min(Math.max((scale - 0.3) / 0.7, 0), 1);
     ctx.font = `${size}px Arial`;
     ctx.fillStyle = `rgba(220,220,220,${opacity.toFixed(2)})`;
@@ -323,3 +326,472 @@ function animate() {
 }
 
 animate();
+
+// ----------------------------------------------------------------------------------------
+
+// report_li_4 輪播
+const boxes = document.querySelectorAll('.img-box');
+let currentIndex = 0;
+let intervalId;
+
+function showImage(index) {
+  boxes.forEach((box, i) => {
+    if (i === index) {
+      box.classList.add('active');
+    } else {
+      box.classList.remove('active');
+    }
+  });
+}
+
+function startCarousel() {
+  intervalId = setInterval(() => {
+    currentIndex = (currentIndex + 1) % boxes.length;
+    showImage(currentIndex);
+  }, 3000);
+}
+
+function stopCarousel() {
+  clearInterval(intervalId);
+}
+
+// 初始化第一張
+showImage(currentIndex);
+startCarousel();
+
+// 滑鼠移入暫停輪播
+boxes.forEach((box, index) => {
+  box.addEventListener('mouseenter', () => {
+    stopCarousel();
+    currentIndex = index;
+    showImage(currentIndex);
+  });
+
+  box.addEventListener('mouseleave', () => {
+    startCarousel();
+  });
+
+  // 如需支援點擊切換，也可加入以下：
+  // box.addEventListener('click', () => {
+  //   stopCarousel();
+  //   currentIndex = index;
+  //   showImage(currentIndex);
+  // });
+});
+
+// ----------------------------------------------------------------------------------------
+
+// report_li_5 硬幣輪播
+const coinImages = [
+  '/images/coin_1.svg',
+  '/images/coin_2.svg',
+  '/images/coin_3.svg'
+];
+
+const track = document.getElementById('carouselTrack');
+
+// 複製三組圖片做無縫輪播 (前中後)
+[...coinImages, ...coinImages, ...coinImages].forEach((src, i) => {
+  const item = document.createElement('div');
+  item.className = 'carousel-item';
+  item.innerHTML = `<img src="${src}" alt="carousel image" />`;
+  item.style.opacity = '0.3';
+  item.style.flex = '0 0 33.33%'; // 修改 flex 屬性，防止伸縮
+  item.style.padding = '0'; // 移除內邊距
+  item.style.margin = '0'; // 移除外邊距
+  track.appendChild(item);
+});
+
+const items = track.children;
+const total = coinImages.length;
+let index = total - 1;
+
+// 設置 track 的樣式
+track.style.display = 'flex';
+track.style.width = '300%';
+track.style.gap = '0'; // 移除間隙
+track.style.padding = '0'; // 移除內邊距
+track.style.margin = '0'; // 移除外邊距
+track.style.justifyContent = 'flex-start'; // 改為靠左對齊，避免中間有空隙
+
+function updateCarousel() {
+  // 重置所有項目的透明度和active狀態
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove('active');
+    items[i].style.opacity = '0.3';
+  }
+
+  // 設置當前項目及其相鄰項目
+  const prevIndex = (index - 1 + items.length) % items.length;
+  const nextIndex = (index + 1) % items.length;
+
+  // 設置三個可見項目的狀態
+  items[prevIndex].style.opacity = '0.3';
+  items[prevIndex].classList.add('active');
+  items[prevIndex].style.transform = 'scale(0.8)';
+
+  items[index].style.opacity = '1';
+  items[index].classList.add('active');
+  items[index].style.transform = 'scale(1)';
+
+  items[nextIndex].style.opacity = '0.3';
+  items[nextIndex].classList.add('active');
+  items[nextIndex].style.transform = 'scale(0.8)';
+
+  // 添加過渡效果
+  items[prevIndex].style.transition = 'all 0.5s ease';
+  items[index].style.transition = 'all 0.5s ease';
+  items[nextIndex].style.transition = 'all 0.5s ease';
+
+  const itemWidth = items[0].offsetWidth;
+  const offset = itemWidth * (index - Math.floor(total / 2));
+  track.style.transform = `translateX(${-offset}px)`;
+
+  // 當滑到最後一組的最後一張時，瞬間跳回中間組的最後一張
+  if (index >= total * 2) {
+    setTimeout(() => {
+      track.style.transition = 'none';
+      index = total;
+      const resetOffset = itemWidth * (index - Math.floor(total / 2));
+      track.style.transform = `translateX(${-resetOffset}px)`;
+      track.offsetHeight; // 強制重繪
+      track.style.transition = 'transform 0.5s ease';
+      updateItemStates();
+    }, 500);
+  }
+  // 當滑到第一組的第一張時，瞬間跳回中間組的第一張
+  else if (index < total) {
+    setTimeout(() => {
+      track.style.transition = 'none';
+      index = total * 2 - 1;
+      const resetOffset = itemWidth * (index - Math.floor(total / 2));
+      track.style.transform = `translateX(${-resetOffset}px)`;
+      track.offsetHeight; // 強制重繪
+      track.style.transition = 'transform 0.5s ease';
+      updateItemStates();
+    }, 500);
+  }
+}
+
+function updateItemStates() {
+  // 更新所有項目的狀態
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove('active');
+    items[i].style.opacity = '0.3';
+    items[i].style.transform = 'scale(0.8)';
+  }
+
+  const prevIndex = (index - 1 + items.length) % items.length;
+  const nextIndex = (index + 1) % items.length;
+
+  items[prevIndex].classList.add('active');
+  items[prevIndex].style.opacity = '0.3';
+  items[prevIndex].style.transform = 'scale(0.8)';
+
+  items[index].classList.add('active');
+  items[index].style.opacity = '1';
+  items[index].style.transform = 'scale(1)';
+
+  items[nextIndex].classList.add('active');
+  items[nextIndex].style.opacity = '0.3';
+  items[nextIndex].style.transform = 'scale(0.8)';
+}
+
+function autoSlide() {
+  index++;
+  updateCarousel();
+}
+
+// 初始化
+track.style.transition = 'transform 0.5s ease';
+updateCarousel();
+setInterval(autoSlide, 2500);
+
+window.addEventListener('resize', updateCarousel);
+
+// ----------------------------------------------------------------------------------------
+
+// report_li_6_title 內容輪播
+const slides = document.querySelectorAll(".report_li_6_text_carousel .slide");
+const controls = document.querySelector(".controls");
+let current = 0;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === index);
+    dots[i].classList.toggle("active", i === index);
+  });
+}
+
+// Create navigation dots
+const dots = Array.from(slides).map((_, i) => {
+  const dot = document.createElement("span");
+  dot.addEventListener("click", () => {
+    current = i;
+    showSlide(current);
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 3000);
+  });
+  controls.appendChild(dot);
+  return dot;
+});
+
+// Initialize first dot as active
+dots[0].classList.add("active");
+
+function nextSlide() {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}
+
+// Start automatic slideshow
+let interval = setInterval(nextSlide, 3000);
+
+// Pause slideshow on hover
+const carousel = document.querySelector(".report_li_6_text_carousel");
+carousel.addEventListener("mouseenter", () => clearInterval(interval));
+carousel.addEventListener("mouseleave", () => {
+  interval = setInterval(nextSlide, 3000);
+});
+
+// ----------------------------------------------------------------------------------------
+
+// report_li_7_ul 系統
+const sliderTrack = document.getElementById("sliderTrack");
+if (sliderTrack) {
+  const slides = Array.from(sliderTrack.children);
+  let activeIndex = 0;
+  const totalSlides = slides.length;
+
+  function updateSlider() {
+    slides.forEach((slide, i) => {
+      // 只顯示當前和相鄰的兩個幻燈片
+      const isVisible = i === activeIndex ||
+        i === (activeIndex + 1) % totalSlides ||
+        i === (activeIndex + 2) % totalSlides;
+      slide.classList.toggle("active", isVisible);
+
+      // 設置透明度
+      if (isVisible) {
+        slide.style.opacity = "1";
+        slide.style.visibility = "visible";
+      } else {
+        slide.style.opacity = "0";
+        slide.style.visibility = "hidden";
+      }
+    });
+
+    // 計算位移
+    const slideWidth = slides[0].offsetWidth;
+    const translateX = slideWidth * activeIndex;
+    sliderTrack.style.transform = `translateX(-${translateX}px)`;
+
+    // 當到達最後一組時，無縫回到開始
+    if (activeIndex >= totalSlides - 2) {
+      setTimeout(() => {
+        sliderTrack.style.transition = 'none';
+        activeIndex = 0;
+        updateSlider();
+        setTimeout(() => {
+          sliderTrack.style.transition = 'transform 0.5s ease';
+        }, 50);
+      }, 500);
+    }
+  }
+
+  function moveToNext() {
+    activeIndex = (activeIndex + 1) % totalSlides;
+    updateSlider();
+  }
+
+  let autoSlideTimer = setInterval(moveToNext, 3000);
+
+  // 手滑功能
+  let startX = 0;
+  let isSwiping = false;
+
+  sliderTrack.addEventListener("touchstart", e => {
+    clearInterval(autoSlideTimer);
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  });
+
+  sliderTrack.addEventListener("touchend", e => {
+    if (!isSwiping) return;
+
+    const endX = e.changedTouches[0].clientX;
+    const delta = endX - startX;
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) {
+        activeIndex = (activeIndex + 1) % totalSlides;
+      } else {
+        activeIndex = (activeIndex - 1 + totalSlides) % totalSlides;
+      }
+    }
+    updateSlider();
+    autoSlideTimer = setInterval(moveToNext, 3000);
+    isSwiping = false;
+  });
+
+  sliderTrack.addEventListener("touchmove", e => {
+    if (!isSwiping) return;
+    e.preventDefault();
+  });
+
+  window.addEventListener("resize", updateSlider);
+  updateSlider();
+}
+
+// ----------------------------------------------------------------------------------------
+
+// report_li_8_t 國旗輪播
+const iconTrack = document.getElementById("iconTrack");
+const iconItems = document.querySelectorAll(".icon-item");
+const itemHeight = iconItems[0].offsetHeight;
+const totalItems = iconItems.length; // 4個國旗
+
+let activeSlideIndex = 0;
+let isTransitioning = false;
+
+// 克隆第一個國旗到最後，實現無縫循環
+const firstItemClone = iconItems[0].cloneNode(true);
+iconTrack.appendChild(firstItemClone);
+
+// 初始化位置
+iconTrack.style.transform = "translateY(0)";
+
+// 輪播函數
+function slideNext() {
+  if (isTransitioning) return;
+
+  activeSlideIndex++;
+  isTransitioning = true;
+
+  iconTrack.style.transition = "transform 0.8s ease-in-out";
+  iconTrack.style.transform = `translateY(-${itemHeight * activeSlideIndex}px)`;
+
+  // 當到達最後一個克隆國旗時
+  if (activeSlideIndex >= totalItems) {
+    setTimeout(() => {
+      // 取消過渡效果，瞬間回到第一個國旗
+      iconTrack.style.transition = "none";
+      iconTrack.style.transform = "translateY(0)";
+      activeSlideIndex = 0;
+
+      // 重新啟用過渡效果
+      setTimeout(() => {
+        iconTrack.style.transition = "transform 0.8s ease-in-out";
+        isTransitioning = false;
+      }, 50);
+    }, 800);
+  } else {
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 800);
+  }
+}
+
+// 自動輪播，每4秒切換一次
+let autoSlideInterval = setInterval(slideNext, 4000);
+
+// 滑鼠懸停時暫停輪播
+iconTrack.addEventListener("mouseenter", () => {
+  clearInterval(autoSlideInterval);
+});
+
+// 滑鼠離開時恢復輪播
+iconTrack.addEventListener("mouseleave", () => {
+  autoSlideInterval = setInterval(slideNext, 4000);
+});
+
+// 觸摸事件處理
+let touchStartY = 0;
+let touchEndY = 0;
+
+iconTrack.addEventListener("touchstart", (e) => {
+  touchStartY = e.touches[0].clientY;
+  clearInterval(autoSlideInterval);
+});
+
+iconTrack.addEventListener("touchmove", (e) => {
+  if (isTransitioning) return;
+  touchEndY = e.touches[0].clientY;
+  const diff = touchEndY - touchStartY;
+
+  // 提高滑動靈敏度
+  if (Math.abs(diff) > 30) {
+    if (diff > 0 && activeSlideIndex > 0) {
+      // 向上滑動切換到上一個國旗
+      activeSlideIndex--;
+    } else if (diff < 0 && activeSlideIndex < totalItems) {
+      // 向下滑動切換到下一個國旗
+      activeSlideIndex++;
+    }
+    iconTrack.style.transform = `translateY(-${itemHeight * activeSlideIndex}px)`;
+    touchStartY = touchEndY;
+  }
+});
+
+iconTrack.addEventListener("touchend", () => {
+  autoSlideInterval = setInterval(slideNext, 4000);  // 每 4 秒輪播
+});
+
+// ----------------------------------------------------------------------------------------
+
+window.addEventListener('scroll', function () {
+  const image = document.getElementById('report_li_3_title');
+  if (window.scrollY < 1400) {
+    image.style.position = 'absolute';
+    image.style.top = '-900px';
+    image.style.transition = 'all 1s ease-in-out'
+  } else {
+    image.style.position = 'relative';
+    image.style.top = '0px';
+    image.style.transition = 'all 1s ease-in-out'
+  }
+});
+
+window.addEventListener('scroll', function () {
+  const image = document.getElementById('report_li_2_title');
+  if (window.scrollY < 1400) {
+    image.style.position = 'absolute';
+    image.style.top = '-370px';
+    image.style.transition = 'all 1s ease-in-out'
+  } else {
+    image.style.position = 'relative';
+    image.style.top = '0px';
+    image.style.transition = 'all 1s ease-in-out'
+  }
+});
+
+window.addEventListener('scroll', function () {
+  const image = document.getElementById('report_li_4_title');
+  if (window.scrollY < 1400) {
+    image.style.position = 'absolute';
+    image.style.top = '-900px';
+    image.style.left = '-570px';
+    image.style.transition = 'all 1s ease-in-out'
+  } else {
+    image.style.position = 'relative';
+    image.style.top = '0px';
+    image.style.left = '0px';
+    image.style.transition = 'all 1s ease-in-out'
+  }
+});
+
+window.addEventListener('scroll', function () {
+  const image = document.getElementById('report_li_1_title');
+  if (window.scrollY < 1400) {
+    image.style.position = 'absolute';
+    image.style.top = '-550px';
+    image.style.left = '-80px';
+    image.style.transition = 'all 1s ease-in-out'
+  } else {
+    image.style.position = 'relative';
+    image.style.top = '0px';
+    image.style.left = '0px';
+    image.style.transition = 'all 1s ease-in-out'
+  }
+});
+
+// ----------------------------------------------------------------------------------------
