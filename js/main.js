@@ -235,7 +235,7 @@ window.addEventListener('resize', resize);
 resize();
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const particleCount = 300; // 增加粒子數量使球體更密集
+const particleCount = 200; // 增加粒子數量使球體更密集
 const radius = Math.min(W, H) * 0.4; // 根據螢幕大小動態調整半徑
 const focalLength = 500; // 增加焦距讓3D效果更明顯
 const particles = [];
