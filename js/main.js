@@ -603,17 +603,29 @@ if (sliderTrack) {
   let activeIndex = 0;
   const totalSlides = slides.length;
 
+  // 克隆前两个幻灯片到末尾，实现无缝循环
+  const firstSlide = slides[0].cloneNode(true);
+  const secondSlide = slides[1].cloneNode(true);
+  sliderTrack.appendChild(firstSlide);
+  sliderTrack.appendChild(secondSlide);
+
   function updateSlider() {
     slides.forEach((slide, i) => {
-      // 只顯示當前和相鄰的兩個幻燈片
+      // 显示当前和相邻的两个幻灯片
       const isVisible = i === activeIndex ||
         i === (activeIndex + 1) % totalSlides ||
         i === (activeIndex + 2) % totalSlides;
       slide.classList.toggle("active", isVisible);
 
-      // 設置透明度
+      // 设置透明度
       if (isVisible) {
-        slide.style.opacity = "1";
+        if (i === (activeIndex + 1) % totalSlides) {
+          // 中间项完全不透明
+          slide.style.opacity = "1";
+        } else {
+          // 两侧项半透明
+          slide.style.opacity = "0.5";
+        }
         slide.style.visibility = "visible";
       } else {
         slide.style.opacity = "0";
@@ -621,13 +633,13 @@ if (sliderTrack) {
       }
     });
 
-    // 計算位移
+    // 计算位移
     const slideWidth = slides[0].offsetWidth;
     const translateX = slideWidth * activeIndex;
     sliderTrack.style.transform = `translateX(-${translateX}px)`;
 
-    // 當到達最後一組時，無縫回到開始
-    if (activeIndex >= totalSlides - 2) {
+    // 当到达最后一组时，无缝回到开始
+    if (activeIndex >= totalSlides) {
       setTimeout(() => {
         sliderTrack.style.transition = 'none';
         activeIndex = 0;
@@ -640,12 +652,15 @@ if (sliderTrack) {
   }
 
   function moveToNext() {
-    activeIndex = (activeIndex + 1) % totalSlides;
+    activeIndex++;
     updateSlider();
   }
 
   function moveToPrev() {
-    activeIndex = (activeIndex - 1 + totalSlides) % totalSlides;
+    activeIndex--;
+    if (activeIndex < 0) {
+      activeIndex = totalSlides - 1;
+    }
     updateSlider();
   }
 
@@ -860,8 +875,8 @@ const scrollHandler = debounce(() => {
   const elements = {
     'report_li_3_title': { top: '-900px', left: '0' },
     'report_li_2_title': { top: '-370px', left: '0' },
-    'report_li_4_title': { top: '-900px', left: '-570px' },
-    'report_li_1_title': { top: '-630px', left: '-80px' }
+    'report_li_4_title': { top: '-1100px', left: '-570px' },
+    'report_li_1_title': { top: '-730px', left: '-80px' }
   };
 
   Object.entries(elements).forEach(([id, positions]) => {
