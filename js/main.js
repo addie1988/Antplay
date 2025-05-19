@@ -229,9 +229,9 @@ const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const focalLength = 500; // 增加焦距讓3D效果更明顯
 
 let W, H;
-let particleCount = 200; // 默认粒子数量
+let particleCount = 700; // 默认粒子数量
 let radius = 0; // 球体半径
-let baseFontSize = 40; // 默认字体大小
+let baseFontSize = 30; // 默认字体大小
 let particles = []; // 粒子数组
 
 function resize() {
@@ -430,9 +430,9 @@ const track = document.getElementById('carouselTrack');
   item.className = 'carousel-item';
   item.innerHTML = `<img src="${src}" alt="carousel image" />`;
   item.style.opacity = '0.3';
-  item.style.flex = '0 0 33.33%'; // 修改 flex 屬性，防止伸縮
-  item.style.padding = '0'; // 移除內邊距
-  item.style.margin = '0'; // 移除外邊距
+  item.style.flex = '0 0 33.33%';
+  item.style.padding = '0';
+  item.style.margin = '0';
   track.appendChild(item);
 });
 
@@ -443,16 +443,27 @@ let index = total - 1;
 // 設置 track 的樣式
 track.style.display = 'flex';
 track.style.width = '300%';
-track.style.gap = '0'; // 移除間隙
-track.style.padding = '0'; // 移除內邊距
-track.style.margin = '0'; // 移除外邊距
-track.style.justifyContent = 'flex-start'; // 改為靠左對齊，避免中間有空隙
+track.style.gap = '0';
+track.style.padding = '0';
+track.style.margin = '0';
+track.style.justifyContent = 'flex-start';
+track.style.transition = 'transform 0.5s ease';
+
+// 設置每個輪播項的樣式
+Array.from(items).forEach(item => {
+  item.style.margin = '0';
+  item.style.padding = '0';
+  item.style.width = '33.33%';
+  item.style.flex = '0 0 33.33%';
+  item.style.transition = 'all 0.5s ease';
+});
 
 function updateCarousel() {
   // 重置所有項目的透明度和active狀態
   for (let i = 0; i < items.length; i++) {
     items[i].classList.remove('active');
     items[i].style.opacity = '0.3';
+    items[i].style.transform = 'scale(0.8)';
   }
 
   // 設置當前項目及其相鄰項目
@@ -471,11 +482,6 @@ function updateCarousel() {
   items[nextIndex].style.opacity = '0.3';
   items[nextIndex].classList.add('active');
   items[nextIndex].style.transform = 'scale(0.8)';
-
-  // 添加過渡效果
-  items[prevIndex].style.transition = 'all 0.5s ease';
-  items[index].style.transition = 'all 0.5s ease';
-  items[nextIndex].style.transition = 'all 0.5s ease';
 
   const itemWidth = items[0].offsetWidth;
   const offset = itemWidth * (index - Math.floor(total / 2));
@@ -638,16 +644,37 @@ if (sliderTrack) {
     updateSlider();
   }
 
+  function moveToPrev() {
+    activeIndex = (activeIndex - 1 + totalSlides) % totalSlides;
+    updateSlider();
+  }
+
   let autoSlideTimer = setInterval(moveToNext, 3000);
 
   // 手滑功能
   let startX = 0;
   let isSwiping = false;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
 
   sliderTrack.addEventListener("touchstart", e => {
     clearInterval(autoSlideTimer);
     startX = e.touches[0].clientX;
     isSwiping = true;
+    currentTranslate = prevTranslate;
+  });
+
+  sliderTrack.addEventListener("touchmove", e => {
+    if (!isSwiping) return;
+    e.preventDefault();
+    
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    const translate = currentTranslate + diff;
+    
+    // 添加阻尼效果
+    const dampedTranslate = translate * 0.5;
+    sliderTrack.style.transform = `translateX(${dampedTranslate}px)`;
   });
 
   sliderTrack.addEventListener("touchend", e => {
@@ -655,21 +682,76 @@ if (sliderTrack) {
 
     const endX = e.changedTouches[0].clientX;
     const delta = endX - startX;
+    
     if (Math.abs(delta) > 50) {
       if (delta < 0) {
-        activeIndex = (activeIndex + 1) % totalSlides;
+        moveToNext();
       } else {
-        activeIndex = (activeIndex - 1 + totalSlides) % totalSlides;
+        moveToPrev();
       }
+    } else {
+      // 如果滑动距离不够，回到原位
+      updateSlider();
     }
-    updateSlider();
+    
+    prevTranslate = -activeIndex * slides[0].offsetWidth;
     autoSlideTimer = setInterval(moveToNext, 3000);
     isSwiping = false;
   });
 
-  sliderTrack.addEventListener("touchmove", e => {
-    if (!isSwiping) return;
-    e.preventDefault();
+  // 添加鼠标事件支持
+  let isDragging = false;
+  let startMouseX = 0;
+
+  sliderTrack.addEventListener("mousedown", e => {
+    clearInterval(autoSlideTimer);
+    isDragging = true;
+    startMouseX = e.clientX;
+    currentTranslate = prevTranslate;
+    sliderTrack.style.cursor = "grabbing";
+  });
+
+  sliderTrack.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+    
+    const currentX = e.clientX;
+    const diff = currentX - startMouseX;
+    const translate = currentTranslate + diff;
+    
+    // 添加阻尼效果
+    const dampedTranslate = translate * 0.5;
+    sliderTrack.style.transform = `translateX(${dampedTranslate}px)`;
+  });
+
+  sliderTrack.addEventListener("mouseup", e => {
+    if (!isDragging) return;
+    
+    const endX = e.clientX;
+    const delta = endX - startMouseX;
+    
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) {
+        moveToNext();
+      } else {
+        moveToPrev();
+      }
+    } else {
+      // 如果滑动距离不够，回到原位
+      updateSlider();
+    }
+    
+    prevTranslate = -activeIndex * slides[0].offsetWidth;
+    autoSlideTimer = setInterval(moveToNext, 3000);
+    isDragging = false;
+    sliderTrack.style.cursor = "grab";
+  });
+
+  sliderTrack.addEventListener("mouseleave", () => {
+    if (isDragging) {
+      isDragging = false;
+      updateSlider();
+      sliderTrack.style.cursor = "grab";
+    }
   });
 
   window.addEventListener("resize", updateSlider);
@@ -779,7 +861,7 @@ const scrollHandler = debounce(() => {
     'report_li_3_title': { top: '-900px', left: '0' },
     'report_li_2_title': { top: '-370px', left: '0' },
     'report_li_4_title': { top: '-900px', left: '-570px' },
-    'report_li_1_title': { top: '-550px', left: '-80px' }
+    'report_li_1_title': { top: '-630px', left: '-80px' }
   };
 
   Object.entries(elements).forEach(([id, positions]) => {
