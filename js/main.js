@@ -225,30 +225,64 @@ window.addEventListener('scroll', () => {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const blocks = document.querySelectorAll('.content-block');
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const focalLength = 500; // 增加焦距讓3D效果更明顯
 
 let W, H;
+let particleCount = 200; // 默认粒子数量
+let radius = 0; // 球体半径
+let baseFontSize = 40; // 默认字体大小
+let particles = []; // 粒子数组
+
 function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
+  // 获取父容器的尺寸而不是整个窗口
+  const container = canvas.parentElement;
+  W = canvas.width = container.clientWidth;
+  H = canvas.height = container.clientHeight;
+  
+  // 根据屏幕尺寸动态调整参数
+  const screenSize = Math.min(W, H);
+  particleCount = Math.floor(screenSize / 5); // 根据屏幕大小调整粒子数量
+  radius = screenSize * 0.4; // 根据屏幕大小调整球体半径
+  baseFontSize = screenSize * 0.04; // 根据屏幕大小调整基础字体大小
+  
+  // 重新初始化粒子
+  initParticles();
 }
-window.addEventListener('resize', resize);
+
+// 初始化粒子
+function initParticles() {
+  particles = []; // 重置粒子数组
+  const goldenRatio = (1 + Math.sqrt(5)) / 2;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const theta = 2 * Math.PI * i / goldenRatio;
+    const phi = Math.acos(1 - 2 * (i + 0.5) / particleCount);
+    const x = Math.cos(theta) * Math.sin(phi);
+    const y = Math.sin(theta) * Math.sin(phi);
+    const z = Math.cos(phi);
+    particles.push({ x, y, z, letter: letters[i % letters.length] });
+  }
+}
+
+// 防抖函数
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// 监听窗口大小变化
+window.addEventListener('resize', debounce(resize, 250));
+
+// 初始化
 resize();
-
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const particleCount = 200; // 增加粒子數量使球體更密集
-const radius = Math.min(W, H) * 0.4; // 根據螢幕大小動態調整半徑
-const focalLength = 500; // 增加焦距讓3D效果更明顯
-const particles = [];
-
-const goldenRatio = (1 + Math.sqrt(5)) / 2;
-for (let i = 0; i < particleCount; i++) {
-  const theta = 2 * Math.PI * i / goldenRatio;
-  const phi = Math.acos(1 - 2 * (i + 0.5) / particleCount);
-  const x = Math.cos(theta) * Math.sin(phi);
-  const y = Math.sin(theta) * Math.sin(phi);
-  const z = Math.cos(phi);
-  particles.push({ x, y, z, letter: letters[i % letters.length] });
-}
 
 let angleX = 0, angleY = 0;
 let isDragging = false, lastX, lastY;
@@ -315,7 +349,7 @@ function animate() {
     const scale = focalLength / (focalLength + rp.z * radius);
     const x2d = rp.x * radius * scale + W / 2;
     const y2d = rp.y * radius * scale + H / 2;
-    const size = scale * 40; // 增加字體大小
+    const size = scale * baseFontSize; // 使用动态基础字体大小
     const opacity = Math.min(Math.max((scale - 0.3) / 0.7, 0), 1);
     ctx.font = `${size}px Arial`;
     ctx.fillStyle = `rgba(220,220,220,${opacity.toFixed(2)})`;
@@ -738,60 +772,33 @@ iconTrack.addEventListener("touchend", () => {
 
 // ----------------------------------------------------------------------------------------
 
-window.addEventListener('scroll', function () {
-  const image = document.getElementById('report_li_3_title');
-  if (window.scrollY < 1400) {
-    image.style.position = 'absolute';
-    image.style.top = '-900px';
-    image.style.transition = 'all 1s ease-in-out'
-  } else {
-    image.style.position = 'relative';
-    image.style.top = '0px';
-    image.style.transition = 'all 1s ease-in-out'
-  }
-});
+// 修改滚动事件监听器，使用防抖优化性能
+const scrollHandler = debounce(() => {
+  const scrollPosition = window.scrollY;
+  const elements = {
+    'report_li_3_title': { top: '-900px', left: '0' },
+    'report_li_2_title': { top: '-370px', left: '0' },
+    'report_li_4_title': { top: '-900px', left: '-570px' },
+    'report_li_1_title': { top: '-550px', left: '-80px' }
+  };
 
-window.addEventListener('scroll', function () {
-  const image = document.getElementById('report_li_2_title');
-  if (window.scrollY < 1400) {
-    image.style.position = 'absolute';
-    image.style.top = '-370px';
-    image.style.transition = 'all 1s ease-in-out'
-  } else {
-    image.style.position = 'relative';
-    image.style.top = '0px';
-    image.style.transition = 'all 1s ease-in-out'
-  }
-});
+  Object.entries(elements).forEach(([id, positions]) => {
+    const element = document.getElementById(id);
+    if (element) {
+      if (scrollPosition < 1400) {
+        element.style.position = 'absolute';
+        element.style.top = positions.top;
+        element.style.left = positions.left;
+      } else {
+        element.style.position = 'relative';
+        element.style.top = '0px';
+        element.style.left = '0px';
+      }
+      element.style.transition = 'all 1s ease-in-out';
+    }
+  });
+}, 100);
 
-window.addEventListener('scroll', function () {
-  const image = document.getElementById('report_li_4_title');
-  if (window.scrollY < 1400) {
-    image.style.position = 'absolute';
-    image.style.top = '-900px';
-    image.style.left = '-570px';
-    image.style.transition = 'all 1s ease-in-out'
-  } else {
-    image.style.position = 'relative';
-    image.style.top = '0px';
-    image.style.left = '0px';
-    image.style.transition = 'all 1s ease-in-out'
-  }
-});
-
-window.addEventListener('scroll', function () {
-  const image = document.getElementById('report_li_1_title');
-  if (window.scrollY < 1400) {
-    image.style.position = 'absolute';
-    image.style.top = '-550px';
-    image.style.left = '-80px';
-    image.style.transition = 'all 1s ease-in-out'
-  } else {
-    image.style.position = 'relative';
-    image.style.top = '0px';
-    image.style.left = '0px';
-    image.style.transition = 'all 1s ease-in-out'
-  }
-});
+window.addEventListener('scroll', scrollHandler);
 
 // ----------------------------------------------------------------------------------------
