@@ -1644,6 +1644,7 @@ html {
 .games .games_content .games_box .games_box_content a .games_box_area .games_box_area_content .games_box_area_text .games_box_area_text_content {
   text-align: center;
   line-height: 6;
+  width: 90%;
 }
 
 .games .games_content .games_box .games_box_content a .games_box_area .games_box_area_content .games_box_area_text .games_box_area_text_content p {
