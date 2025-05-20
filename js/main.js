@@ -222,34 +222,30 @@ window.addEventListener('scroll', () => {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const blocks = document.querySelectorAll('.content-block');
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const focalLength = 500; // 增加焦距讓3D效果更明顯
+const text = 'Antplay';
+const focalLength = 500;
 
 let W, H;
-let particleCount = 700; // 默认粒子数量
-let radius = 0; // 球体半径
-let baseFontSize = 30; // 默认字体大小
-let particles = []; // 粒子数组
+let particleCount = 1500; // 增加粒子数量以保持视觉效果
+let radius = 0;
+let baseFontSize = 8; // 减小基础字体大小
+let particles = [];
 
 function resize() {
-  // 获取父容器的尺寸而不是整个窗口
   const container = canvas.parentElement;
   W = canvas.width = container.clientWidth;
   H = canvas.height = container.clientHeight;
 
-  // 根据屏幕尺寸动态调整参数
   const screenSize = Math.min(W, H);
-  particleCount = Math.floor(screenSize / 5); // 根据屏幕大小调整粒子数量
-  radius = screenSize * 0.4; // 根据屏幕大小调整球体半径
-  baseFontSize = screenSize * 0.04; // 根据屏幕大小调整基础字体大小
+  particleCount = Math.floor(screenSize / 2); // 增加粒子密度
+  radius = screenSize * 0.4;
+  baseFontSize = screenSize * 0.01; // 减小字体大小比例
 
-  // 重新初始化粒子
   initParticles();
 }
 
-// 初始化粒子
 function initParticles() {
-  particles = []; // 重置粒子数组
+  particles = [];
   const goldenRatio = (1 + Math.sqrt(5)) / 2;
 
   for (let i = 0; i < particleCount; i++) {
@@ -258,7 +254,22 @@ function initParticles() {
     const x = Math.cos(theta) * Math.sin(phi);
     const y = Math.sin(theta) * Math.sin(phi);
     const z = Math.cos(phi);
-    particles.push({ x, y, z, letter: letters[i % letters.length] });
+    
+    // 创建更极端的大小对比
+    let sizeFactor;
+    if (Math.random() < 0.3) { // 30% 的几率生成大文字
+      sizeFactor = 1.5 + Math.random() * 1.5; // 1.5-3.0 倍大小
+    } else { // 70% 的几率生成小文字
+      sizeFactor = 0.2 + Math.random() * 0.3; // 0.2-0.5 倍大小
+    }
+    
+    particles.push({ 
+      x, 
+      y, 
+      z, 
+      text: text,
+      sizeFactor: sizeFactor 
+    });
   }
 }
 
@@ -346,11 +357,11 @@ function animate() {
     const scale = focalLength / (focalLength + rp.z * radius);
     const x2d = rp.x * radius * scale + W / 2;
     const y2d = rp.y * radius * scale + H / 2;
-    const size = scale * baseFontSize; // 使用动态基础字体大小
+    const size = scale * baseFontSize * p.sizeFactor;
     const opacity = Math.min(Math.max((scale - 0.3) / 0.7, 0), 1);
     ctx.font = `${size}px Arial`;
-    ctx.fillStyle = `rgba(220,220,220,${opacity.toFixed(2)})`;
-    ctx.fillText(p.letter, x2d, y2d);
+    ctx.fillStyle = `rgba(200,200,200,${opacity.toFixed(2)})`;
+    ctx.fillText(p.text, x2d, y2d);
   });
 
   requestAnimationFrame(animate);
