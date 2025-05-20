@@ -647,19 +647,20 @@ window.addEventListener('resize', moveToSlide);
 
 // ----------------------------------------------------------------------------------------
 
-// report_li_8_t 國旗輪播  const iconTrack = document.getElementById("iconTrack");
-  const iconItems = document.querySelectorAll(".icon-item");
-  const itemHeight = iconItems[0].offsetHeight;
-  const totalItems = iconItems.length;
+// report_li_8_t 國旗輪播
+const iconTrack = document.getElementById("iconTrack");
+const iconItems = document.querySelectorAll(".icon-item");
+const itemHeight = iconItems[0].offsetHeight;
+const totalItems = iconItems.length;
 
-  let activeSlideIndex = 0;
+let activeSlideIndex = 0;
 
-  setInterval(() => {
-    activeSlideIndex++;
-    if (activeSlideIndex > totalItems - 3) {
-      iconTrack.style.transition = "none";
-      iconTrack.style.transform = "translateY(0)";
-      activeSlideIndex = 1;
+setInterval(() => {
+  activeSlideIndex++;
+  if (activeSlideIndex > totalItems - 3) {
+    iconTrack.style.transition = "none";
+    iconTrack.style.transform = "translateY(0)";
+    activeSlideIndex = 1;
 
       setTimeout(() => {
         iconTrack.style.transition = "transform 0.5s ease-in-out";
@@ -706,4 +707,21 @@ const scrollHandler = debounce(() => {
 window.addEventListener('scroll', scrollHandler);
 
 // ----------------------------------------------------------------------------------------
+
+// Close dropdown menus when clicking outside
+document.addEventListener('click', (event) => {
+    // Close language dropdown
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    if (dropdownMenu && !dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+    }
+
+    // Close hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    if (hamburger && navMenu && !hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+        navMenu.classList.remove('show');
+    }
+});
 
