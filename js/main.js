@@ -43,17 +43,14 @@ document.querySelectorAll('.scroll-link').forEach(link => {
 
 // 動態效果
 const container = document.getElementById('carousel');
-const totalImages = 96; // 更新為 36 張圖片
+const totalImages = 36; // 更新為 36 張圖片
 const boxHeight = 10;
 const maxOffset = 20; // 最大偏移距離
 
 // 固定圖片 ID 陣列，使用不同的圖片，現在有 36 張圖片
 const imageIds = [
   1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039,
-  1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059,
-  1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079,
-  1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099,
-  1100, 1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115,
+  1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055
 ];
 
 // 建立圖片與初始狀態
@@ -239,13 +236,13 @@ function resize() {
   const container = canvas.parentElement;
   W = canvas.width = container.clientWidth;
   H = canvas.height = container.clientHeight;
-  
+
   // 根据屏幕尺寸动态调整参数
   const screenSize = Math.min(W, H);
   particleCount = Math.floor(screenSize / 5); // 根据屏幕大小调整粒子数量
   radius = screenSize * 0.4; // 根据屏幕大小调整球体半径
   baseFontSize = screenSize * 0.04; // 根据屏幕大小调整基础字体大小
-  
+
   // 重新初始化粒子
   initParticles();
 }
@@ -254,7 +251,7 @@ function resize() {
 function initParticles() {
   particles = []; // 重置粒子数组
   const goldenRatio = (1 + Math.sqrt(5)) / 2;
-  
+
   for (let i = 0; i < particleCount; i++) {
     const theta = 2 * Math.PI * i / goldenRatio;
     const phi = Math.acos(1 - 2 * (i + 0.5) / particleCount);
@@ -496,7 +493,7 @@ function updateCarousel() {
       track.style.transform = `translateX(${-resetOffset}px)`;
       track.offsetHeight; // 強制重繪
       track.style.transition = 'transform 0.5s ease';
-      updateItemStates();
+      updateCarousel();
     }, 500);
   }
   // 當滑到第一組的第一張時，瞬間跳回中間組的第一張
@@ -508,33 +505,9 @@ function updateCarousel() {
       track.style.transform = `translateX(${-resetOffset}px)`;
       track.offsetHeight; // 強制重繪
       track.style.transition = 'transform 0.5s ease';
-      updateItemStates();
+      updateCarousel();
     }, 500);
   }
-}
-
-function updateItemStates() {
-  // 更新所有項目的狀態
-  for (let i = 0; i < items.length; i++) {
-    items[i].classList.remove('active');
-    items[i].style.opacity = '0.3';
-    items[i].style.transform = 'scale(0.8)';
-  }
-
-  const prevIndex = (index - 1 + items.length) % items.length;
-  const nextIndex = (index + 1) % items.length;
-
-  items[prevIndex].classList.add('active');
-  items[prevIndex].style.opacity = '0.3';
-  items[prevIndex].style.transform = 'scale(0.8)';
-
-  items[index].classList.add('active');
-  items[index].style.opacity = '1';
-  items[index].style.transform = 'scale(1)';
-
-  items[nextIndex].classList.add('active');
-  items[nextIndex].style.opacity = '0.3';
-  items[nextIndex].style.transform = 'scale(0.8)';
 }
 
 function autoSlide() {
@@ -597,275 +570,124 @@ carousel.addEventListener("mouseleave", () => {
 // ----------------------------------------------------------------------------------------
 
 // report_li_7_ul 系統
-const sliderTrack = document.getElementById("sliderTrack");
-if (sliderTrack) {
-  const slides = Array.from(sliderTrack.children);
-  let activeIndex = 0;
-  const totalSlides = slides.length;
+const imageList = [
+  './images/data_img/android.webp',
+  './images/data_img/html-5.webp',
+  './images/data_img/mac-os-logo.webp',
+  './images/data_img/macos.webp',
+  './images/data_img/windows.webp',
+];
 
-  // 克隆前两个幻灯片到末尾，实现无缝循环
-  const firstSlide = slides[0].cloneNode(true);
-  const secondSlide = slides[1].cloneNode(true);
-  sliderTrack.appendChild(firstSlide);
-  sliderTrack.appendChild(secondSlide);
+const sliderTrack = document.getElementById('sliderTrack');
 
-  function updateSlider() {
-    slides.forEach((slide, i) => {
-      // 显示当前和相邻的两个幻灯片
-      const isVisible = i === activeIndex ||
-        i === (activeIndex + 1) % totalSlides ||
-        i === (activeIndex + 2) % totalSlides;
-      slide.classList.toggle("active", isVisible);
+const repeatedImages = [...imageList, ...imageList, ...imageList];
 
-      // 设置透明度
-      if (isVisible) {
-        if (i === (activeIndex + 1) % totalSlides) {
-          // 中间项完全不透明
-          slide.style.opacity = "1";
-        } else {
-          // 两侧项半透明
-          slide.style.opacity = "0.5";
-        }
-        slide.style.visibility = "visible";
-      } else {
-        slide.style.opacity = "0";
-        slide.style.visibility = "hidden";
-      }
-    });
+repeatedImages.forEach(src => {
+  const slide = document.createElement('div');
+  slide.className = 'slideItem';
+  slide.innerHTML = `<img src="${src}" alt="coin" />`;
+  sliderTrack.appendChild(slide);
+});
 
-    // 计算位移
-    const slideWidth = slides[0].offsetWidth;
-    const translateX = slideWidth * activeIndex;
-    sliderTrack.style.transform = `translateX(-${translateX}px)`;
+const slideItems = sliderTrack.children;
+const slideCount = imageList.length;
+let currentSlide = slideCount;
 
-    // 当到达最后一组时，无缝回到开始
-    if (activeIndex >= totalSlides) {
-      setTimeout(() => {
-        sliderTrack.style.transition = 'none';
-        activeIndex = 0;
-        updateSlider();
-        setTimeout(() => {
-          sliderTrack.style.transition = 'transform 0.5s ease';
-        }, 50);
-      }, 500);
-    }
-  }
+function updateSlides() {
+  Array.from(slideItems).forEach(item => item.classList.remove('active'));
 
-  function moveToNext() {
-    activeIndex++;
-    updateSlider();
-  }
+  const prev = (currentSlide - 1 + slideItems.length) % slideItems.length;
+  const next = (currentSlide + 1) % slideItems.length;
 
-  function moveToPrev() {
-    activeIndex--;
-    if (activeIndex < 0) {
-      activeIndex = totalSlides - 1;
-    }
-    updateSlider();
-  }
-
-  let autoSlideTimer = setInterval(moveToNext, 3000);
-
-  // 手滑功能
-  let startX = 0;
-  let isSwiping = false;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
-
-  sliderTrack.addEventListener("touchstart", e => {
-    clearInterval(autoSlideTimer);
-    startX = e.touches[0].clientX;
-    isSwiping = true;
-    currentTranslate = prevTranslate;
-  });
-
-  sliderTrack.addEventListener("touchmove", e => {
-    if (!isSwiping) return;
-    e.preventDefault();
-    
-    const currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    const translate = currentTranslate + diff;
-    
-    // 添加阻尼效果
-    const dampedTranslate = translate * 0.5;
-    sliderTrack.style.transform = `translateX(${dampedTranslate}px)`;
-  });
-
-  sliderTrack.addEventListener("touchend", e => {
-    if (!isSwiping) return;
-
-    const endX = e.changedTouches[0].clientX;
-    const delta = endX - startX;
-    
-    if (Math.abs(delta) > 50) {
-      if (delta < 0) {
-        moveToNext();
-      } else {
-        moveToPrev();
-      }
-    } else {
-      // 如果滑动距离不够，回到原位
-      updateSlider();
-    }
-    
-    prevTranslate = -activeIndex * slides[0].offsetWidth;
-    autoSlideTimer = setInterval(moveToNext, 3000);
-    isSwiping = false;
-  });
-
-  // 添加鼠标事件支持
-  let isDragging = false;
-  let startMouseX = 0;
-
-  sliderTrack.addEventListener("mousedown", e => {
-    clearInterval(autoSlideTimer);
-    isDragging = true;
-    startMouseX = e.clientX;
-    currentTranslate = prevTranslate;
-    sliderTrack.style.cursor = "grabbing";
-  });
-
-  sliderTrack.addEventListener("mousemove", e => {
-    if (!isDragging) return;
-    
-    const currentX = e.clientX;
-    const diff = currentX - startMouseX;
-    const translate = currentTranslate + diff;
-    
-    // 添加阻尼效果
-    const dampedTranslate = translate * 0.5;
-    sliderTrack.style.transform = `translateX(${dampedTranslate}px)`;
-  });
-
-  sliderTrack.addEventListener("mouseup", e => {
-    if (!isDragging) return;
-    
-    const endX = e.clientX;
-    const delta = endX - startMouseX;
-    
-    if (Math.abs(delta) > 50) {
-      if (delta < 0) {
-        moveToNext();
-      } else {
-        moveToPrev();
-      }
-    } else {
-      // 如果滑动距离不够，回到原位
-      updateSlider();
-    }
-    
-    prevTranslate = -activeIndex * slides[0].offsetWidth;
-    autoSlideTimer = setInterval(moveToNext, 3000);
-    isDragging = false;
-    sliderTrack.style.cursor = "grab";
-  });
-
-  sliderTrack.addEventListener("mouseleave", () => {
-    if (isDragging) {
-      isDragging = false;
-      updateSlider();
-      sliderTrack.style.cursor = "grab";
-    }
-  });
-
-  window.addEventListener("resize", updateSlider);
-  updateSlider();
+  slideItems[prev].classList.add('active');
+  slideItems[currentSlide].classList.add('active');
+  slideItems[next].classList.add('active');
 }
+
+function moveToSlide() {
+  const slideWidth = slideItems[0].offsetWidth;
+  const offset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
+  sliderTrack.style.transform = `translateX(${-offset}px)`;
+  updateSlides();
+}
+
+function slideNext() {
+  currentSlide++;
+  moveToSlide();
+}
+
+sliderTrack.addEventListener('transitionend', () => {
+  const slideWidth = slideItems[0].offsetWidth;
+
+  if (currentSlide >= slideCount * 2) {
+    sliderTrack.style.transition = 'none';
+    currentSlide = slideCount;
+    const resetOffset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
+    sliderTrack.style.transform = `translateX(${-resetOffset}px)`;
+    sliderTrack.offsetHeight;
+    sliderTrack.style.transition = 'transform 0.5s ease';
+    updateSlides();
+  } else if (currentSlide < slideCount) {
+    sliderTrack.style.transition = 'none';
+    currentSlide = slideCount * 2 - 1;
+    const resetOffset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
+    sliderTrack.style.transform = `translateX(${-resetOffset}px)`;
+    sliderTrack.offsetHeight;
+    sliderTrack.style.transition = 'transform 0.5s ease';
+    updateSlides();
+  }
+});
+
+window.onload = () => {
+  moveToSlide();
+  setInterval(slideNext, 2500);
+};
+
+window.addEventListener('resize', moveToSlide);
 
 // ----------------------------------------------------------------------------------------
 
 // report_li_8_t 國旗輪播
-const iconTrack = document.getElementById("iconTrack");
-const iconItems = document.querySelectorAll(".icon-item");
-const itemHeight = iconItems[0].offsetHeight;
-const totalItems = iconItems.length; // 4個國旗
+const heartTrack = document.getElementById('heart-track');
+const hearts = document.querySelectorAll('.heart-token');
+const heartSize = 120;
+let heartIndex = 1; // 初始在第一個真實幣別
 
-let activeSlideIndex = 0;
-let isTransitioning = false;
+function updateHeartPosition(immediate = false) {
+  if (!heartTrack) return; // 防護檢查
 
-// 克隆第一個國旗到最後，實現無縫循環
-const firstItemClone = iconItems[0].cloneNode(true);
-iconTrack.appendChild(firstItemClone);
+  const offset = (heartIndex - 1) * heartSize;
+  heartTrack.style.transition = immediate ? 'none' : 'transform 0.5s ease';
+  heartTrack.style.transform = `translateX(-${offset}px)`;
 
-// 初始化位置
-iconTrack.style.transform = "translateY(0)";
+  // 更新高亮心幣
+  hearts.forEach((heart, i) => {
+    if (heart) {
+      heart.classList.toggle('focused', i === heartIndex);
+    }
+  });
+}
 
-// 輪播函數
-function slideNext() {
-  if (isTransitioning) return;
+function advanceHeart() {
+  if (!heartTrack || hearts.length === 0) return; // 防護檢查
 
-  activeSlideIndex++;
-  isTransitioning = true;
+  heartIndex++;
+  updateHeartPosition();
 
-  iconTrack.style.transition = "transform 0.8s ease-in-out";
-  iconTrack.style.transform = `translateY(-${itemHeight * activeSlideIndex}px)`;
-
-  // 當到達最後一個克隆國旗時
-  if (activeSlideIndex >= totalItems) {
+  // 當超出尾端 clone，立即無縫跳回
+  if (heartIndex === hearts.length - 1) {
     setTimeout(() => {
-      // 取消過渡效果，瞬間回到第一個國旗
-      iconTrack.style.transition = "none";
-      iconTrack.style.transform = "translateY(0)";
-      activeSlideIndex = 0;
-
-      // 重新啟用過渡效果
-      setTimeout(() => {
-        iconTrack.style.transition = "transform 0.8s ease-in-out";
-        isTransitioning = false;
-      }, 50);
-    }, 800);
-  } else {
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 800);
+      heartIndex = 1;
+      updateHeartPosition(true);
+    }, 500); // 等 transition 完成
   }
 }
 
-// 自動輪播，每4秒切換一次
-let autoSlideInterval = setInterval(slideNext, 4000);
-
-// 滑鼠懸停時暫停輪播
-iconTrack.addEventListener("mouseenter", () => {
-  clearInterval(autoSlideInterval);
-});
-
-// 滑鼠離開時恢復輪播
-iconTrack.addEventListener("mouseleave", () => {
-  autoSlideInterval = setInterval(slideNext, 4000);
-});
-
-// 觸摸事件處理
-let touchStartY = 0;
-let touchEndY = 0;
-
-iconTrack.addEventListener("touchstart", (e) => {
-  touchStartY = e.touches[0].clientY;
-  clearInterval(autoSlideInterval);
-});
-
-iconTrack.addEventListener("touchmove", (e) => {
-  if (isTransitioning) return;
-  touchEndY = e.touches[0].clientY;
-  const diff = touchEndY - touchStartY;
-
-  // 提高滑動靈敏度
-  if (Math.abs(diff) > 30) {
-    if (diff > 0 && activeSlideIndex > 0) {
-      // 向上滑動切換到上一個國旗
-      activeSlideIndex--;
-    } else if (diff < 0 && activeSlideIndex < totalItems) {
-      // 向下滑動切換到下一個國旗
-      activeSlideIndex++;
-    }
-    iconTrack.style.transform = `translateY(-${itemHeight * activeSlideIndex}px)`;
-    touchStartY = touchEndY;
-  }
-});
-
-iconTrack.addEventListener("touchend", () => {
-  autoSlideInterval = setInterval(slideNext, 4000);  // 每 4 秒輪播
-});
+// 只在元素存在時初始化
+if (heartTrack && hearts.length > 0) {
+  updateHeartPosition(true);
+  setInterval(advanceHeart, 4000);   // 每 4 秒輪播
+}
 
 // ----------------------------------------------------------------------------------------
 
@@ -882,16 +704,20 @@ const scrollHandler = debounce(() => {
   Object.entries(elements).forEach(([id, positions]) => {
     const element = document.getElementById(id);
     if (element) {
-      if (scrollPosition < 1400) {
-        element.style.position = 'absolute';
-        element.style.top = positions.top;
-        element.style.left = positions.left;
-      } else {
-        element.style.position = 'relative';
-        element.style.top = '0px';
-        element.style.left = '0px';
+      try {
+        if (scrollPosition < 1400) {
+          element.style.position = 'absolute';
+          element.style.top = positions.top;
+          element.style.left = positions.left;
+        } else {
+          element.style.position = 'relative';
+          element.style.top = '0px';
+          element.style.left = '0px';
+        }
+        element.style.transition = 'all 1s ease-in-out';
+      } catch (error) {
+        console.warn(`Error updating element ${id}:`, error);
       }
-      element.style.transition = 'all 1s ease-in-out';
     }
   });
 }, 100);
@@ -899,3 +725,16 @@ const scrollHandler = debounce(() => {
 window.addEventListener('scroll', scrollHandler);
 
 // ----------------------------------------------------------------------------------------
+
+// The best game platform in 2024
+//                         7x24 hours professional customer service for you! 字體閃爍
+const message = "The best game platform in 2024 7x24 hours professional customer service for you!";
+const textBox = document.getElementById("textBox");
+
+message.split("").forEach((letter, index) => {
+  const spanElement = document.createElement("span");
+  spanElement.textContent = letter;
+  spanElement.classList.add("text-letter");
+  spanElement.style.animationDelay = `${index * 0.2}s`;
+  textBox.appendChild(spanElement);
+});
