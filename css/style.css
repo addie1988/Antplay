@@ -1333,6 +1333,9 @@ html {
     margin-top: 0;
     margin-top: 30px;
   }
+  .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_7_title .report_li_7_title_content .report_li_7_title_h1 .report_li_7_title_h1_content {
+    padding: 0;
+  }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box {
     width: 70%;
   }
