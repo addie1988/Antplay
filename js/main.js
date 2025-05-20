@@ -647,47 +647,28 @@ window.addEventListener('resize', moveToSlide);
 
 // ----------------------------------------------------------------------------------------
 
-// report_li_8_t 國旗輪播
-const heartTrack = document.getElementById('heart-track');
-const hearts = document.querySelectorAll('.heart-token');
-const heartSize = 120;
-let heartIndex = 1; // 初始在第一個真實幣別
+// report_li_8_t 國旗輪播  const iconTrack = document.getElementById("iconTrack");
+  const iconItems = document.querySelectorAll(".icon-item");
+  const itemHeight = iconItems[0].offsetHeight;
+  const totalItems = iconItems.length;
 
-function updateHeartPosition(immediate = false) {
-  if (!heartTrack) return; // 防護檢查
+  let activeSlideIndex = 0;
 
-  const offset = (heartIndex - 1) * heartSize;
-  heartTrack.style.transition = immediate ? 'none' : 'transform 0.5s ease';
-  heartTrack.style.transform = `translateX(-${offset}px)`;
+  setInterval(() => {
+    activeSlideIndex++;
+    if (activeSlideIndex > totalItems - 3) {
+      iconTrack.style.transition = "none";
+      iconTrack.style.transform = "translateY(0)";
+      activeSlideIndex = 1;
 
-  // 更新高亮心幣
-  hearts.forEach((heart, i) => {
-    if (heart) {
-      heart.classList.toggle('focused', i === heartIndex);
+      setTimeout(() => {
+        iconTrack.style.transition = "transform 0.5s ease-in-out";
+        iconTrack.style.transform = `translateY(-${itemHeight * activeSlideIndex}px)`;
+      }, 50);
+    } else {
+      iconTrack.style.transform = `translateY(-${itemHeight * activeSlideIndex}px)`;
     }
-  });
-}
-
-function advanceHeart() {
-  if (!heartTrack || hearts.length === 0) return; // 防護檢查
-
-  heartIndex++;
-  updateHeartPosition();
-
-  // 當超出尾端 clone，立即無縫跳回
-  if (heartIndex === hearts.length - 1) {
-    setTimeout(() => {
-      heartIndex = 1;
-      updateHeartPosition(true);
-    }, 500); // 等 transition 完成
-  }
-}
-
-// 只在元素存在時初始化
-if (heartTrack && hearts.length > 0) {
-  updateHeartPosition(true);
-  setInterval(advanceHeart, 4000);   // 每 4 秒輪播
-}
+  }, 2000);
 
 // ----------------------------------------------------------------------------------------
 
@@ -728,7 +709,7 @@ window.addEventListener('scroll', scrollHandler);
 
 // The best game platform in 2024
 //                         7x24 hours professional customer service for you! 字體閃爍
-const message = "The best game platform in 2024 7x24 hours professional customer service for you!";
+const message = "The best game platform in 2024 <br> 7x24 hours professional customer service for you!";
 const textBox = document.getElementById("textBox");
 
 message.split("").forEach((letter, index) => {
