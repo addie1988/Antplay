@@ -18,6 +18,35 @@ $dynamic_background: #000
 
 // -----------------------------------------------------           
 
+.banner
+    position: relative
+    overflow: hidden
+    .banner_content
+        margin: 0 auto
+        img
+            width: 100%
+/* 搖晃動畫 */
+@keyframes shake
+    0%, 100%
+        transform: translateX(0)
+
+    25%
+        transform: translateX(-5px)
+
+    75%
+        transform: translateX(5px)
+
+@media screen and (max-width:1300px)
+    .banner
+        height: 300px
+        background: url('../images/Banner_1.jpg') no-repeat left
+        background-size: cover
+        .banner_content
+            img
+                display: none
+
+// -----------------------------------------------------------------------------------------    
+
 .teaching
     position: relative
     background: url('../images/Shading.svg') center
