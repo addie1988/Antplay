@@ -1296,9 +1296,6 @@ html {
     margin-right: 0;
     margin-top: 30px;
   }
-  .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_2_title {
-    margin-top: 30px;
-  }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box .report_li_2_title .report_li_2_title_content .report_li_2_title_h1 .report_li_2_title_h1_content {
     display: flex;
     flex-wrap: wrap;
@@ -1339,9 +1336,6 @@ html {
   }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box {
     width: 70%;
-    margin-top: 30px;
-  }
-  .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_3_title {
     margin-top: 30px;
   }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_5_title {
