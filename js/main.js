@@ -686,7 +686,7 @@ const scrollHandler = debounce(() => {
     const element = document.getElementById(id);
     if (element) {
       try {
-        if (scrollPosition < 1400) {
+        if (scrollPosition < 1500) {
           element.style.position = 'absolute';
           element.style.top = positions.top;
           element.style.left = positions.left;
