@@ -1410,6 +1410,9 @@ html {
     transform: none !important;
     transition: none !important;
   }
+  .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_3_box .report_li_8_title .report_li_8_title_content .report_li_8_title_h1 .report_li_8_title_h1_content h1 {
+    text-align: center;
+  }
 }
 
 .welcome_to_antplay {
@@ -1431,20 +1434,9 @@ html {
   flex-wrap: wrap;
 }
 
-.welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures .customer_service_text_and_pictures_content .text-box {
-  max-width: 60%;
-  font-size: 2em;
-  font-family: sans-serif;
-  white-space: pre;
+.welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures .customer_service_text_and_pictures_content p {
   color: #fff;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.welcome_to_antplay .welcome_to_antplay_content .customer_service_text_and_pictures .customer_service_text_and_pictures_content .text-box .text-letter {
-  opacity: 0;
-  animation: fade-in 0.1s ease-in forwards;
+  font-size: 22px;
 }
 
 .welcome_to_antplay .welcome_to_antplay_img {
