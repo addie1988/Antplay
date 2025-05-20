@@ -677,7 +677,7 @@ const scrollHandler = debounce(() => {
   const scrollPosition = window.scrollY;
   const elements = {
     'report_li_3_title': { top: '-900px', left: '0' },
-    'report_li_2_title': { top: '-370px', left: '0' },
+    'report_li_2_title': { top: '-570px', left: '0' },
     'report_li_4_title': { top: '-1100px', left: '-570px' },
     'report_li_1_title': { top: '-730px', left: '-80px' }
   };
