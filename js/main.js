@@ -709,7 +709,7 @@ window.addEventListener('scroll', scrollHandler);
 
 // The best game platform in 2024
 //                         7x24 hours professional customer service for you! 字體閃爍
-const message = "The best game platform in 2024 <br> 7x24 hours professional customer service for you!";
+const message = "The best game platform in 2024 7x24 hours professional customer service for you!";
 const textBox = document.getElementById("textBox");
 
 message.split("").forEach((letter, index) => {
