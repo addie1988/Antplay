@@ -226,9 +226,9 @@ const text = 'Antplay';
 const focalLength = 500;
 
 let W, H;
-let particleCount = 1500; // 增加粒子数量以保持视觉效果
+let particleCount = 800; // 減少粒子數量
 let radius = 0;
-let baseFontSize = 8; // 减小基础字体大小
+let baseFontSize = 8;
 let particles = [];
 
 function resize() {
@@ -237,9 +237,9 @@ function resize() {
   H = canvas.height = container.clientHeight;
 
   const screenSize = Math.min(W, H);
-  particleCount = Math.floor(screenSize / 2); // 增加粒子密度
+  particleCount = Math.floor(screenSize / 3); // 減少粒子密度
   radius = screenSize * 0.4;
-  baseFontSize = screenSize * 0.01; // 减小字体大小比例
+  baseFontSize = screenSize * 0.01;
 
   initParticles();
 }
@@ -255,12 +255,12 @@ function initParticles() {
     const y = Math.sin(theta) * Math.sin(phi);
     const z = Math.cos(phi);
     
-    // 创建更极端的大小对比
+    // 調整大小對比
     let sizeFactor;
-    if (Math.random() < 0.3) { // 30% 的几率生成大文字
-      sizeFactor = 1.5 + Math.random() * 1.5; // 1.5-3.0 倍大小
-    } else { // 70% 的几率生成小文字
-      sizeFactor = 0.2 + Math.random() * 0.3; // 0.2-0.5 倍大小
+    if (Math.random() < 0.2) { // 減少大文字的機率到 20%
+      sizeFactor = 1.2 + Math.random() * 1.2; // 1.2-2.4 倍大小
+    } else { // 80% 的機率生成小文字
+      sizeFactor = 0.3 + Math.random() * 0.4; // 0.3-0.7 倍大小
     }
     
     particles.push({ 
@@ -351,7 +351,7 @@ function animate() {
     const size = scale * baseFontSize * p.sizeFactor;
     const opacity = Math.min(Math.max((scale - 0.3) / 0.7, 0), 1);
     ctx.font = `${size}px Arial`;
-    ctx.fillStyle = `rgba(200,200,200,${opacity.toFixed(2)})`;
+    ctx.fillStyle = `rgba(215,215,215,${opacity.toFixed(2)})`;
     ctx.fillText(p.text, x2d, y2d);
   });
 
