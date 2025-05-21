@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -49,7 +50,7 @@ table {
   border-spacing: 0;
 }
 
-.header, .banner, .banner .banner_content svg, .footer .footer_content .footer_logo .footer_logo_content .footer_logo_content_img .footer_logo_content_img_content, .footer .footer_content .footer_text .footer_text_content ul li .contact_details .contact_details_content .contact_details_img .contact_details_img_content {
+.header, .banner, .footer .footer_content .footer_logo .footer_logo_content .footer_logo_content_img .footer_logo_content_img_content, .footer .footer_content .footer_text .footer_text_content ul li .contact_details .contact_details_content .contact_details_img .contact_details_img_content {
   display: flex;
   align-items: center;
   justify-content: center;
