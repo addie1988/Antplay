@@ -324,15 +324,6 @@ function updateBlockByAngle() {
   }
 }
 
-let autoSection = 0;
-setInterval(() => {
-  currentSection = autoSection % 6;
-  blocks.forEach((b, i) => {
-    b.classList.toggle('active', i === currentSection);
-  });
-  autoSection++;
-}, 2000);
-
 function rotateX(p, a) {
   const cos = Math.cos(a), sin = Math.sin(a);
   return { x: p.x, y: p.y * cos - p.z * sin, z: p.y * sin + p.z * cos };
