@@ -628,24 +628,29 @@ function slideNext() {
 }
 
 sliderTrack.addEventListener('transitionend', () => {
-  const slideWidth = slideItems[0].offsetWidth;
+  try {
+    const slideWidth = slideItems[0].offsetWidth;
 
-  if (currentSlide >= slideCount * 2) {
-    sliderTrack.style.transition = 'none';
-    currentSlide = slideCount;
-    const resetOffset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
-    sliderTrack.style.transform = `translateX(${-resetOffset}px)`;
-    sliderTrack.offsetHeight;
-    sliderTrack.style.transition = 'transform 0.5s ease';
-    updateSlides();
-  } else if (currentSlide < slideCount) {
-    sliderTrack.style.transition = 'none';
-    currentSlide = slideCount * 2 - 1;
-    const resetOffset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
-    sliderTrack.style.transform = `translateX(${-resetOffset}px)`;
-    sliderTrack.offsetHeight;
-    sliderTrack.style.transition = 'transform 0.5s ease';
-    updateSlides();
+    if (currentSlide >= slideCount * 2) {
+      sliderTrack.style.transition = 'none';
+      currentSlide = slideCount;
+      const resetOffset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
+      sliderTrack.style.transform = `translateX(${-resetOffset}px)`;
+      sliderTrack.offsetHeight;
+      sliderTrack.style.transition = 'transform 0.5s ease';
+      updateSlides();
+    } else if (currentSlide < slideCount) {
+      sliderTrack.style.transition = 'none';
+      currentSlide = slideCount * 2 - 1;
+      const resetOffset = slideWidth * (currentSlide - Math.floor(slideCount / 2));
+      sliderTrack.style.transform = `translateX(${-resetOffset}px)`;
+      sliderTrack.offsetHeight;
+      sliderTrack.style.transition = 'transform 0.5s ease';
+      updateSlides();
+    }
+  } catch (error) {
+    showErrorMessage(`輪播圖切換時發生錯誤: ${error.message}`);
+    console.error('Carousel error:', error);
   }
 });
 
@@ -684,7 +689,36 @@ setInterval(() => {
 
 // ----------------------------------------------------------------------------------------
 
-// 修改滚动事件监听器，使用防抖优化性能
+// 錯誤訊息顯示函數
+function showErrorMessage(message, type = 'error') {
+  const errorDiv = document.createElement('div');
+  errorDiv.className = `error-message ${type}`;
+  errorDiv.textContent = message;
+  
+  // 設置樣式
+  errorDiv.style.position = 'fixed';
+  errorDiv.style.top = '20px';
+  errorDiv.style.right = '20px';
+  errorDiv.style.padding = '15px 20px';
+  errorDiv.style.borderRadius = '5px';
+  errorDiv.style.zIndex = '9999';
+  errorDiv.style.color = '#fff';
+  errorDiv.style.backgroundColor = type === 'error' ? '#ff4444' : '#2196F3';
+  errorDiv.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+  errorDiv.style.transition = 'all 0.3s ease';
+  
+  document.body.appendChild(errorDiv);
+  
+  // 3秒後自動消失
+  setTimeout(() => {
+    errorDiv.style.opacity = '0';
+    setTimeout(() => {
+      document.body.removeChild(errorDiv);
+    }, 300);
+  }, 3000);
+}
+
+// 修改滾動事件處理器
 const scrollHandler = debounce(() => {
   const scrollPosition = window.scrollY;
   const elements = {
@@ -709,6 +743,7 @@ const scrollHandler = debounce(() => {
         }
         element.style.transition = 'all 1s ease-in-out';
       } catch (error) {
+        showErrorMessage(`更新元素 ${id} 時發生錯誤: ${error.message}`);
         console.warn(`Error updating element ${id}:`, error);
       }
     }
