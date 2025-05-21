@@ -1242,6 +1242,7 @@ html
                     .games_box_area
                         position: relative
                         transition: all 1s ease
+                        transform-origin: center
                         margin: 6px
                         overflow: hidden
                         border-radius: 10px
@@ -1252,7 +1253,7 @@ html
                             left: 0
                             bottom: 0
                             width: 100%
-                            background-color: rgba(1, 34, 63, 0.7)
+                            background-color: rgba(1, 34, 63, 1)
                             z-index: 1
                             opacity: 0
                             transition: all 1s ease
@@ -1284,28 +1285,28 @@ html
                                         font-size: 25px
                                         text-align: center
                                         line-height: 1
-                                    span
-                                        color: $main_color
-                                        font-size: 22px
-                                        background-color: #fff
-                                        padding: 4px 60px
-                                        border-radius: 100px
-                                        transition: all 1s ease
-                                        margin-top: 100px
+                                        &:nth-child(2)
+                                            color: $main_color
+                                            font-size: 22px
+                                            background-color: #fff
+                                            padding: 10px 60px
+                                            border-radius: 100px
+                                            transition: all 1s ease
+                                            margin-top: 40px
                     &:hover
                         .games_box_area
                             &::after
                                 opacity: 1
-                                transform: scale(3)
+                                transform: scale(1.6)
                             .games_box_area_content
                                 opacity: 1
                                 .games_box_area_text
                                     .games_box_area_text_content
                                         p
-                                        span
-                                            color: #fff
-                                            border: 2px solid #fff
-                                            background: none
+                                            &:nth-child(2)
+                                                color: #fff
+                                                border: 2px solid #fff
+                                                background: none
 @media screen and (max-width: 1055px)
     .games
         .games_content
