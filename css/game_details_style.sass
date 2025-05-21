@@ -1,6 +1,47 @@
-@import '../css/style.sass'
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video
+    margin: 0
+    padding: 0
+    border: 0
+    font-size: 100%
+    font: inherit
+    vertical-align: baseline
 
-// -----------------------------------------------------------------------------------------      
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section
+    display: block
+
+body
+    line-height: 1
+
+ol, ul
+    list-style: none
+
+blockquote, q
+    quotes: none
+
+blockquote:before, blockquote:after,
+q:before, q:after
+    content: ''
+    content: none
+
+table
+    border-collapse: collapse
+    border-spacing: 0
+
+// -----------------------------------------------------    
 
 $max-width: 1200px
 $flex_width: 50%
@@ -13,18 +54,170 @@ $dynamic_background: #000
     align-items: center
     justify-content: center
 
-%margin
-    margin: 30px 0
+// -----------------------------------------------------    
 
-// -----------------------------------------------------           
+html
+    scroll-behavior: smooth
+
+.spacer
+    height: 0
+    transition: height 0.3s ease
+    &:active
+        height: 80px
+.header
+    position: relative
+    width: 100%
+    height: 70px
+    background-color: $main_color
+    @extend %display_flex
+    .header_content
+        width: $max-width
+        padding-left: 10px
+        padding-right: 10px
+        display: flex
+        align-items: center
+        justify-content: flex-end
+        margin: 0 auto
+        .logo
+            width: $flex_width
+        .menu_language
+            width: $flex_width
+            display: flex
+            align-items: center
+            justify-content: space-between
+            .menu_language_content
+                width: 100%
+                display: flex
+                align-items: center
+                justify-content: flex-end
+                .hamburger
+                    font-size: 1.5em
+                    cursor: pointer
+                    display: none
+                    user-select: none
+                .menu
+                    width: 70%
+                .nav-menu
+                    display: flex
+                    .menu_content
+                        margin: 0 auto
+                        width: 100%
+                        ul
+                            display: flex
+                            justify-content: space-between
+                            flex-wrap: wrap
+                            li
+                                a
+                                    color: #fff
+                                    text-decoration: none
+                                    transition: all 0.8s ease
+                                    &:hover
+                                        color: #0084FF
+                .show
+                    display: block
+                .language
+                    width: 20%
+                    position: relative
+                    display: flex
+                    margin-left: 20px
+                    .language_content
+                        margin: 0 auto
+                        .dropdown-toggle
+                            font-size: 16px
+                            cursor: pointer
+                            width: 29px
+                            height: 29px
+                    .dropdown-content
+                        display: none
+                        position: absolute
+                        right: 0
+                        background-color: rgba(47, 117, 179, 0.8)
+                        min-width: 160px
+                        box-shadow: 0px 8px 16px rgba(0,0,0,0.2)
+                        z-index: 3
+                        a
+                            color: black
+                            padding: 21px 16px
+                            text-decoration: none
+                            display: flex
+                            align-items: center
+                            border-bottom: 2px solid #fff
+                            &:nth-child(4)
+                                border-bottom: none
+                            &:hover
+                                p
+                                    transform: scale(1.5)
+                            img
+                            p
+                                color: #fff
+                                margin-left: 22px
+                                font-size: 12px
+                                transition: font-size 4s ease-in-out
+                    .show
+                        display: block
+.fixed
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 3
+    background-color: rgba(1, 34, 63, 0.7)
+    backdrop-filter: blur(10px)
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2)
+@media screen and (max-width: 770px)
+    .header
+        .header_content
+            .logo
+            .menu_language
+                .menu_language_content
+                    .hamburger
+                        display: block
+                        color: #fff
+                    .menu
+                    .nav-menu
+                        display: none
+                        flex-direction: column
+                        background-color: #444
+                        position: absolute
+                        top: 100%
+                        left: 0
+                        width: 100%
+                        .menu_content
+                            width: 100%
+                            ul
+                                width: 100%
+                                line-height: 4
+                                li
+                                    border-bottom: 2px solid #fff
+                                    width: 100%
+                                    &:nth-child(4)
+                                        border-bottom: none
+                                    a
+                                        width: 100%
+                                        display: inline-block
+                                        margin: 0 20px
+                    .show
+                        display: flex
+                        z-index: 3
+                        background: rgba(47, 117, 176, 0.8)
+                        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2)
+// -----------------------------------------------------------------------------------------
 
 .banner
     position: relative
-    overflow: hidden
+    width: 100%
+    height: 600px
+    display: inline-block
+    background: url('../images/Banner_1.jpg') no-repeat
+    background-size: cover
+    @extend %display_flex
     .banner_content
+        height: 100%
         margin: 0 auto
-        img
-            width: 100%
+        display: flex
+        align-items: center
+        justify-content: center
+        svg
+            @extend %display_flex
 /* 搖晃動畫 */
 @keyframes shake
     0%, 100%
@@ -38,14 +231,14 @@ $dynamic_background: #000
 
 @media screen and (max-width:1300px)
     .banner
-        height: 300px
+        height: 200px
         background: url('../images/Banner_1.jpg') no-repeat left
         background-size: cover
         .banner_content
             img
                 display: none
 
-// -----------------------------------------------------------------------------------------    
+// -----------------------------------------------------------------------------------------     
 
 .teaching
     position: relative
@@ -153,7 +346,7 @@ $dynamic_background: #000
 @media screen and (max-width: 794px)
     .teaching
         .teaching_content
-            padding-top: 30px
+            padding: 30px 0
             .game_details
                 .game_details_content
                     .game_details_img
@@ -178,3 +371,186 @@ $dynamic_background: #000
                             .try_it
                                 .try_it_content
                                     a
+
+// -----------------------------------------------------------------------------------------     
+
+.footer
+    background-color: $main_color
+    .footer_content
+        margin: 0 auto
+        width: $max-width
+        .footer_logo
+            position: relative
+            padding: 80px 0
+            .footer_logo_content
+                margin: 0 auto
+                .footer_logo_content_img
+                    position: relative
+                    .footer_logo_content_img_content
+                        margin: 0 auto
+                        @extend %display_flex
+                        img
+                .footer_logo_content_text
+                    position: relative
+                    margin-top: 60px
+                    .footer_logo_content_text_content
+                        margin: 0 auto
+                        text-align: center
+                        p
+                            font-size: 16px
+                            color: #fff
+        .footer_text
+            position: relative
+            .footer_text_content
+                margin: 0 auto
+                ul
+                    display: flex
+                    flex-wrap: wrap
+                    align-items: flex-start
+                    justify-content: center
+                    li
+                        width: 100%
+                        margin: 20px 0
+                        a
+                            text-decoration: none
+                        .contact_details
+                            position: relative
+                            .contact_details_content
+                                margin: 0 auto
+                                .contact_details_img
+                                    position: relative
+                                    width: 100%
+                                    .contact_details_img_content
+                                        margin: 0 auto
+                                        @extend %display_flex
+                                .contact_details_text
+                                    position: relative
+                                    width: 100%
+                                    margin-top: 26px
+                                    .contact_details_text_content
+                                        margin: 0 auto
+                                        text-align: center
+                                        span
+                                            color: #0084FF
+                                        p
+                                            font-size: 16px
+                                            color: #fff
+                                            margin-top: 10px
+                                            line-height: 1.5
+        .copyright
+            position: relative
+            padding: 60px 0
+            .copyright_content
+                margin: 0 auto
+                text-align: center
+                p
+                    color: #fff
+                    font-size: 12px
+                    padding: 10px 0
+@media screen and (max-width: 1192px)
+    .footer
+        .footer_content
+            width: 100%
+            .footer_logo
+                .footer_logo_content
+                    display: flex
+                    justify-content: center
+                    flex-wrap: wrap
+                    .footer_logo_content_img
+                        width: 90%
+                    .footer_logo_content_text
+                        width: 90%
+            .footer_text
+                .footer_text_content
+                    ul
+                        li
+                            width: 100%
+            .copyright
+                .copyright_content
+                    p
+
+// -----------------------------------------------------------------------------------------    
+
+.float
+    position: fixed
+    right: 0
+    bottom: 4%
+    .float_content
+        margin: 0 auto
+        background-color: rgba(0, 34, 63, 0.7)
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2)
+        width: 85px
+        border-top-left-radius: 10px
+        border-bottom-left-radius: 10px
+        ul
+            padding: 0.5px
+            li
+                margin: 20px 0
+                a
+                    display: flex
+                    flex-wrap: wrap
+                    justify-content: center
+                    img
+                    p
+                        font-size: 11px
+                        color: #fff
+                        margin-top: 20px
+                        text-align: center
+                        line-height: 1.8
+            span
+                border-bottom: 2px solid #fff
+                width: 60%
+                display: block
+                margin: 0 auto
+
+.report_li_6_text_carousel
+    position: relative
+    width: 100%
+    .slide
+        display: none
+        opacity: 0
+        transition: opacity 0.5s ease-in-out
+        text-align: center
+        padding: 20px
+        &.active
+            display: block
+            opacity: 1
+
+.controls
+    margin-top: 20px
+    text-align: center
+    span
+        display: inline-block
+        width: 12px
+        height: 12px
+        margin: 0 5px
+        background: rgba(0, 0, 0, 0.2)
+        border-radius: 50%
+        cursor: pointer
+        transition: background-color 0.3s ease
+        &.active
+            background: rgba(0, 0, 0, 0.8)
+
+.report_li_7_ul
+    display: flex
+    overflow-x: hidden
+    scroll-behavior: smooth
+    cursor: grab
+    user-select: none
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    &.active
+        cursor: grabbing
+        cursor: -webkit-grabbing
+    li
+        flex: 0 0 auto
+        transition: transform 0.3s ease
+        &:hover
+            transform: scale(1.05)
+        img
+            width: 100%
+            height: auto
+            border-radius: 10px
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)
+Ｆ
