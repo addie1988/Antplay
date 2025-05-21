@@ -223,12 +223,12 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const blocks = document.querySelectorAll('.content-block');
 const text = 'Antplay';
-const focalLength = 500;
+const focalLength = 1000;
 
 let W, H;
-let particleCount = 800; // 減少粒子數量
+let particleCount = 100; // 減少粒子數量
 let radius = 0;
-let baseFontSize = 8;
+let baseFontSize = 1;
 let particles = [];
 
 function resize() {
