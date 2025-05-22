@@ -207,37 +207,22 @@ html
 .banner
     position: relative
     width: 100%
-    height: 600px
     display: inline-block
-    background: url('../images/Banner_1.jpg') no-repeat
     background-size: cover
     @extend %display_flex
     .banner_content
-        height: 100%
         margin: 0 auto
         display: flex
         align-items: center
         justify-content: center
-        svg
-/* 搖晃動畫 */
-@keyframes shake
-    0%, 100%
-        transform: translateX(0)
-
-    25%
-        transform: translateX(-5px)
-
-    75%
-        transform: translateX(5px)
-
+        img
+            width: 100%
 @media screen and (max-width:1300px)
     .banner
         height: 200px
-        background: url('../images/Banner_1.jpg') no-repeat left
         background-size: cover
         .banner_content
             img
-                display: none
 
 // -----------------------------------------------------------------------------------------     
 
