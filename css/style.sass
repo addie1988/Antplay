@@ -395,6 +395,7 @@ html
                                                         text-align: left
                                                         display: flex
                                                         align-items: center
+                                                        flex-wrap: wrap
                                                 svg
                                                     width: 50%
                                                     animation: report_li_title_svg 10s infinite
@@ -472,6 +473,7 @@ html
                                                         margin-left: 10px
                                                         display: flex
                                                         align-items: center
+                                                        flex-wrap: wrap
                                                 .report_li_6_text
                                                     position: relative
                                                     .report_li_6_text_content
@@ -539,6 +541,7 @@ html
                                                         font-size: 16px
                                                         margin: 0 auto
                                                         text-align: left
+                                                        flex-wrap: wrap
                                                 .operator
                                                     position: relative
                                                     .operator_content
@@ -592,6 +595,7 @@ html
                                                         text-align: left
                                                         margin-left: 10px
                                                         display: flex
+                                                        flex-wrap: wrap
                                                 .report_li_4_img
                                                     display: flex
                                                     justify-content: center
@@ -655,6 +659,7 @@ html
                                                             margin: 0 auto
                                                             text-align: left
                                                             margin-left: 10px
+                                                            flex-wrap: wrap
                                                     .report_li_7_ul
                                                         position: relative
                                                         .sliderContainer
@@ -712,6 +717,7 @@ html
                                                         margin: 0 auto
                                                         text-align: left
                                                         margin-left: 10px
+                                                        flex-wrap: wrap
                                                 .icon_grid
                                                     display: flex
                                                     flex-wrap: wrap
@@ -813,6 +819,7 @@ html
                                                         margin-left: 10px
                                                         display: flex
                                                         align-items: center
+                                                        flex-wrap: wrap
                                                 .carousel_container
                                                     display: flex
                                                     justify-content: flex-start
@@ -872,6 +879,7 @@ html
                                                             margin: 0 auto
                                                             text-align: left
                                                             width: 100%
+                                                            flex-wrap: wrap
                                                     .report_li_8_img
                                                         position: relative
                                                         .report_li_8_img_content
@@ -1334,37 +1342,27 @@ html
     .footer_content
         margin: 0 auto
         width: $max-width
-        .footer_logo
+        .footer_logo_content_text
             position: relative
-            padding: 80px 0
-            .footer_logo_content
+            margin-top: 60px
+            .footer_logo_content_text_content
                 margin: 0 auto
-                .footer_logo_content_img
-                    position: relative
-                    .footer_logo_content_img_content
-                        margin: 0 auto
-                        @extend %display_flex
-                        img
-                .footer_logo_content_text
-                    position: relative
-                    margin-top: 60px
-                    .footer_logo_content_text_content
-                        margin: 0 auto
-                        text-align: center
-                        p
-                            font-size: 16px
-                            color: #fff
+                text-align: center
+                p
+                    font-size: 16px
+                    color: #fff
         .footer_text
             position: relative
+            padding-top: 30px
             .footer_text_content
                 margin: 0 auto
                 ul
                     display: flex
                     flex-wrap: wrap
-                    align-items: flex-start
+                    align-items: center
                     justify-content: center
                     li
-                        width: 100%
+                        width: 50%
                         margin: 20px 0
                         a
                             text-decoration: none
@@ -1372,29 +1370,30 @@ html
                             position: relative
                             .contact_details_content
                                 margin: 0 auto
+                                display: flex
+                                align-items: center
                                 .contact_details_img
                                     position: relative
-                                    width: 100%
+                                    width: 20%
                                     .contact_details_img_content
                                         margin: 0 auto
                                         @extend %display_flex
                                 .contact_details_text
                                     position: relative
-                                    width: 100%
-                                    margin-top: 26px
+                                    width: 80%
                                     .contact_details_text_content
                                         margin: 0 auto
-                                        text-align: center
+                                        text-align: left
                                         span
                                             color: #0084FF
                                         p
-                                            font-size: 16px
+                                            font-size: 14px
                                             color: #fff
                                             margin-top: 10px
                                             line-height: 1.5
         .copyright
             position: relative
-            padding: 60px 0
+            padding: 10px 0
             .copyright_content
                 margin: 0 auto
                 text-align: center
@@ -1406,15 +1405,8 @@ html
     .footer
         .footer_content
             width: 100%
-            .footer_logo
-                .footer_logo_content
-                    display: flex
-                    justify-content: center
-                    flex-wrap: wrap
-                    .footer_logo_content_img
-                        width: 90%
-                    .footer_logo_content_text
-                        width: 90%
+            .footer_logo_content_text
+                width: 90%
             .footer_text
                 .footer_text_content
                     ul
@@ -1423,7 +1415,6 @@ html
             .copyright
                 .copyright_content
                     p
-
 // -----------------------------------------------------------------------------------------    
 
 .float
@@ -1458,6 +1449,41 @@ html
                 width: 60%
                 display: block
                 margin: 0 auto
+
+.float_rwd
+    position: relative
+    display: none
+    .float_rwd_content
+        margin: 0 auto
+        ul
+            li
+                width: 60px
+                height: 60px
+                margin: 20px 0
+                background-color: #fff
+                border-radius: 50%
+                display: flex
+                justify-content: center
+                align-items: center
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2)
+                a
+                    text-decoration: none
+                     padding: 10px
+                    img
+                        width: 30px
+
+@media screen and (max-width: 500px)
+    .float
+        display: none
+    .float_rwd
+        position: fixed
+        right: 10px
+        bottom: 100px
+        display: block
+        z-index: 6
+        .float_rwd_content
+            ul
+                li
 
 .report_li_6_text_carousel
     position: relative
