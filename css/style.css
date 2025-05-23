@@ -1295,7 +1295,7 @@ html {
   }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_1_box .report_li_6_title .report_li_6_title_content .report_li_6_title_h1 .report_li_6_title_h1_content {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .management .management_content .container .container_content .data_report .data_report_content .report .report_content ul .report_li_2_box {
     width: 50%;
