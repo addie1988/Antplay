@@ -450,6 +450,7 @@ html
     position: fixed
     right: 0
     bottom: 4%
+    z-index: 6
     .float_content
         margin: 0 auto
         background-color: rgba(0, 34, 63, 0.7)
@@ -477,6 +478,41 @@ html
                 width: 60%
                 display: block
                 margin: 0 auto
+
+.float_rwd
+    position: relative
+    display: none
+    .float_rwd_content
+        margin: 0 auto
+        ul
+            li
+                width: 60px
+                height: 60px
+                margin: 20px 0
+                background-color: #fff
+                border-radius: 50%
+                display: flex
+                justify-content: center
+                align-items: center
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2)
+                a
+                    text-decoration: none
+                     padding: 10px
+                    img
+                        width: 30px
+
+@media screen and (max-width: 500px)
+    .float
+        display: none
+    .float_rwd
+        position: fixed
+        right: 10px
+        bottom: 100px
+        display: block
+        z-index: 6
+        .float_rwd_content
+            ul
+                li
 
 .report_li_6_text_carousel
     position: relative
