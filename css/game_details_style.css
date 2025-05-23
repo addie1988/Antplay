@@ -540,6 +540,9 @@ html {
 }
 
 .footer .footer_content .copyright .copyright_content p {
+  width: 80%;
+  margin: 0 auto;
+  line-height: 1.5;
   color: #fff;
   font-size: 12px;
   padding: 10px 0;
