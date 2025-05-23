@@ -270,7 +270,6 @@ html {
 
 @media screen and (max-width: 1300px) {
   .banner {
-    height: 200px;
     background-size: cover;
   }
 }
